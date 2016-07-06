@@ -4,13 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class Author extends Model
 {
-    protected $table = 'books';
+    public $updated_at = false;
     public $created_at = false;
+    protected $table = 'authors';
     protected $fillable= [
-        'title',
-        'author_id',
-        'description'
+        'name'
     ];
 }

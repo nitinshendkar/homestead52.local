@@ -19,3 +19,20 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Author::class, function (Faker\Generator $faker) {
+    return [
+        'author_name' => $faker->name,
+    ];
+});
+
+
+
+$factory->define(App\Book::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->word,
+        'description' => str_random(10),
+        'author_id' => random_int(\DB::table('authors')->min('id'), \DB::table('authors')->max('id')),
+        'updated_at' => $faker->date(),
+    ];
+});

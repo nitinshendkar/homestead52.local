@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBooksTable extends Migration
+class CreateBookTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,12 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('title');
-            $table->text('author');
-            $table->text('description');
-            $table->timestamps();
+            $table->string('title',50);
+            $table->char('description' , 100);
+            $table->integer('author_id')->unsigned();
+            $table->foreign('author_id')->references('id')->on('books');
+            $table->date('updated_at');
+
         });
     }
 

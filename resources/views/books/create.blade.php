@@ -8,8 +8,8 @@
         {!! Form::text('title',null,['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
-        {!! Form::label('Author', 'Author:') !!}
-        {!! Form::text('author',null,['class'=>'form-control']) !!}
+        {!! Form::label('Author Id', 'Author:') !!}
+        {!! Form::text('author_id',null,['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('Description', 'Description:') !!}

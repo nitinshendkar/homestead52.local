@@ -1,8 +1,20 @@
 
 @extends('layout/template')
 
+
 @section('content')
     <h1>BookStore</h1>
+
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <a href="{{url('/books/create')}}" class="btn btn-success">Create Book</a>
     <hr>
     <table class="table table-striped table-bordered table-hover">
@@ -21,7 +33,7 @@
             <tr>
                 <td>{{ $book->id }}</td>
                 <td>{{ $book->title }}</td>
-                <td>{{ $book->author }}</td>
+                <td>{{ $book->author_id }}</td>
                 <td>{{ $book->description }}</td>
                 <td><a href="{{route('books.edit',$book->id)}}" class="btn btn-warning">Update</a></td>
 

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
 use Request;
-use App\Book;
+use App\Author;
 use App\Http\Requests;
 
-class BookController extends Controller {
+class AuthorController extends Controller
+{
+
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +17,9 @@ class BookController extends Controller {
      */
     public function index()
     {
-        $books=Book::all();
+//        $books=Book::all();
 
-        return view('books.index',['books'=>$books]);
+//        return view('books.index',['books'=>$books]);
     }
     /**
      * Show the form for creating a new resource.
@@ -34,10 +37,11 @@ class BookController extends Controller {
      */
     public function store()
     {
-        $book=Request::all();
-        Book::create($book);
-
-        return redirect('books');
+//        $book=Request::all();
+//
+//        Book::create($book);
+//
+//        return redirect('books');
     }
     /**
      * Display the specified resource.
@@ -58,9 +62,9 @@ class BookController extends Controller {
      */
     public function edit($id)
     {
-        $book=Book::find($id);
+/*        $book=Book::find($id);
 
-        return view('books.edit',compact('book'));
+        return view('books.edit',compact('book'));*/
     }
     /**
      * Update the specified resource in storage.
@@ -70,12 +74,12 @@ class BookController extends Controller {
      */
     public function update($id)
     {
-        $bookUpdate=Request::all();
+       /* $bookUpdate=Request::all();
         $book=Book::find($id);
 
         $book->update($bookUpdate);
 
-        return redirect('books');
+        return redirect('books');*/
     }
     /**
      * Remove the specified resource from storage.
@@ -85,8 +89,8 @@ class BookController extends Controller {
      */
     public function destroy($id)
     {
-        Book::find($id)->delete();
+        /*Book::find($id)->delete();
 
-        return redirect('books');
+        return redirect('books');*/
     }
 }
