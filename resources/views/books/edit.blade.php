@@ -7,8 +7,8 @@
         {!! Form::text('title',null,['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
-        {!! Form::label('Author Id', 'Author:') !!}
-        {!! Form::text('author_id',null,['class'=>'form-control']) !!}
+        {!! Form::label('Author Name', 'Author:') !!}
+        {!! Form::text('author_name',null,['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('Description', 'description:') !!}

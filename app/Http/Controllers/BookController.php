@@ -6,6 +6,7 @@ use Request;
 use Validator;
 use App\Book;
 use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller {
     /**
@@ -15,7 +16,10 @@ class BookController extends Controller {
      */
     public function index()
     {
-        $books=Book::all();
+        $books = DB::table('books')
+                    ->join('authors', 'authors.id', '=', 'books.author_id')
+                    ->select('books.id', 'books.title', 'books.description', 'books.author_id','authors.author_name','books.updated_at')
+                    ->get();
 
         return view('books.index',['books'=>$books]);
     }
@@ -38,7 +42,9 @@ class BookController extends Controller {
         $book=Request::all();
 
         $validator = Validator::make($book, [
-            'title' => 'required|unique:posts|max:255',
+            'title' => 'required|max:255',
+            'author_id' => 'required',
+            'description' => 'required|max:255',
         ]);
 
         if ($validator->fails()) {

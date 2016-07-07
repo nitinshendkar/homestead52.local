@@ -33,7 +33,7 @@
             <tr>
                 <td>{{ $book->id }}</td>
                 <td>{{ $book->title }}</td>
-                <td>{{ $book->author_id }}</td>
+                <td>{{ $book->author_name }}</td>
                 <td>{{ $book->description }}</td>
                 <td><a href="{{route('books.edit',$book->id)}}" class="btn btn-warning">Update</a></td>
 

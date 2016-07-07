@@ -4,8 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support;
 
-
-class DatabaseSeeder extends Seeder
+class BookTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,11 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+       factory(App\Book::class, 50)->create();
 
-
-        $this->call(AuthorTableSeeder::class);
-
-        $this->call(BookTableSeeder::class);
-        
     }
 }
