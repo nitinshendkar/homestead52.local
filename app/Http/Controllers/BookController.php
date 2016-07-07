@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Request;
+use Validator;
 use App\Book;
 use App\Http\Requests;
 
@@ -35,6 +36,17 @@ class BookController extends Controller {
     public function store()
     {
         $book=Request::all();
+
+        $validator = Validator::make($book, [
+            'title' => 'required|unique:posts|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('books')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
         Book::create($book);
 
         return redirect('books');
