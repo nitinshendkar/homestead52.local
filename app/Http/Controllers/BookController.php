@@ -42,7 +42,7 @@ class BookController extends Controller {
         ]);
 
         if ($validator->fails()) {
-            return redirect('books')
+            return redirect('books/create')
                 ->withErrors($validator)
                 ->withInput();
         }
