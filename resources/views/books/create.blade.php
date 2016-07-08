@@ -1,5 +1,5 @@
 
-@extends('layout.template')
+@extends('layout/base')
 @section('content')
     <h1>Create Book</h1>
     @if (count($errors) > 0)
