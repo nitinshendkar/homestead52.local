@@ -32,8 +32,8 @@ Route::post('auth/register', ['as'=>'register','uses' =>'Auth\AuthController@pos
 
 Route::get('home', 'HomeController@index');
 
-Route::get('books',['middleware' => 'auth','uses' => 'BookController@index'] );
+Route::get('books',['middleware' => 'auth','uses' => 'BookController@index'] )->name('books');
 Route::get('books/edit/{id}',['as'=>'books.edit','middleware' => 'auth','uses' => 'BookController@edit'] );
-Route::get ('books/destroy/{id}',['as'=>'books.destroy','middleware' => 'auth','uses' => 'BookController@destroy'] );
+Route::delete ('books/destroy/{id}',['as'=>'books.destroy','middleware' => 'auth','uses' => 'BookController@destroy'] );
 Route::get('books/create',['as'=>'books.create','middleware' => 'auth','uses' => 'BookController@create'] );
-Route::get('books/update/{id}',['as'=>'books.update','middleware' => 'auth','uses' => 'BookController@update'] );
+Route::patch('books/update/{id}',['as'=>'books.update','middleware' => 'auth','uses' => 'BookController@update'] );

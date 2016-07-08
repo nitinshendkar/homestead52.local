@@ -57,7 +57,7 @@ class BookController extends Controller {
 
         $this->dispatch(new CreateBook($book));
 
-        return redirect('books');
+        return redirect()->route('books');
     }
     /**
      * Display the specified resource.
@@ -95,7 +95,7 @@ class BookController extends Controller {
 
         $book->update($bookUpdate);
 
-        return redirect('books');
+        return redirect()->route('books');
     }
     /**
      * Remove the specified resource from storage.
@@ -107,6 +107,7 @@ class BookController extends Controller {
     {
 
         $this->dispatch(new DeleteBook($id));
-        return redirect('books');
+
+        return redirect()->route('books');
     }
 }
