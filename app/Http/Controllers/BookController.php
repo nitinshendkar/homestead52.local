@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Request;
 use Validator;
+use App\Jobs\CreateBook;
+use App\Jobs\DeleteBook;
 use App\Book;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
@@ -53,7 +55,7 @@ class BookController extends Controller {
                 ->withInput();
         }
 
-        Book::create($book);
+        $this->dispatch(new CreateBook($book));
 
         return redirect('books');
     }
@@ -103,8 +105,8 @@ class BookController extends Controller {
      */
     public function destroy($id)
     {
-        Book::find($id)->delete();
 
+        $this->dispatch(new DeleteBook($id));
         return redirect('books');
     }
 }
