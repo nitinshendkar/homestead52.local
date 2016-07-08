@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use Auth;
+use Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -28,7 +30,11 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/home';
+
+//    @todo not working
+//    protected $redirectPath = '/home';
+    protected $loginPath = 'auth/login';
 
     /**
      * Create a new authentication controller instance.
@@ -37,7 +43,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware($this->guestMiddleware(), ['except' => 'getLogout']);
     }
 
     /**
@@ -69,4 +75,12 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    public function getLogout()
+    {
+        Auth::logout();
+        Session::flush();
+        return redirect('auth/login');
+    }
+
 }
