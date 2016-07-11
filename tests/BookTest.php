@@ -6,26 +6,27 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class BookTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $this->assertTrue(true);
+    private function __create_user(){
+
+        return factory(App\User::class)->create();
     }
-
-    public function it_check_wether_index_page_is_exist_or_not()
+    /**
+     * @test
+     */
+    public function it_displays_all_books()
     {
-        $response = $this->call('GET', '/books');
 
+        $user = $this->__create_user();
+        $response = $this->actingAs($user)->call('GET', '/books');
         $this->assertEquals(200, $response->status());
     }
 
-    public function testNewBookCreation() {
-        $user = factory(App\User::class)->create();
+    /**
+     * @test
+     */
+    public function it_creates_a_new_book() {
 
+        $user = $this->__create_user();
         $this->actingAs($user)
              ->visit('books/create')
              ->type('Booktest1', 'title')
@@ -34,22 +35,30 @@ class BookTest extends TestCase
              ->press('Save')
              ->seePageIs('/books');
     }
-//
-    public function testNewBookCreationValidation() {
-        $user = factory(App\User::class)->create();
 
-        $this->actingAs($user)->visit('books/create')
-            ->type('102', 'author_id')
+    /**
+     * @test
+     */
+    public function it_does_not_create_book_without_valid_info()
+    {
+
+        $user = $this->__create_user();
+        $this->actingAs($user)
+            ->visit('books/create')
+            ->type('1', 'author_id')
             ->type('Description Test', 'description')
             ->press('Save')
             ->see('The title field is required.');
     }
 
-    public function testNewBookDeletion() {
-        $user = factory(App\User::class)->create();
+    /**
+     * @test
+     */
+    public function it_deletes_a_book() {
 
+        $user = $this->__create_user();
         $this->actingAs($user)
-            ->visit('books/destroy/1')
+            ->visit('books/destroy/4')
             ->press('Delete')
             ->seePageIs('/books');
     }

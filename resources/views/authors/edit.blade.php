@@ -1,4 +1,4 @@
-@extends('layout/base')
+@extends('layout.base')
 @section('content')
     <h1>Update Book</h1>
 
@@ -11,20 +11,12 @@
             </ul>
         </div>
     @endif
-    {!! Form::model($book,['method' => 'PATCH','route'=>['books.update',$book->id]]) !!}
+    {!! Form::model($author,['method' => 'PATCH','route'=>['authors.update',$author->id]]) !!}
     <div class="form-group">
-        {!! Form::label('Title', 'Title:') !!}
-        {!! Form::text('title',null,['class'=>'form-control']) !!}
-    </div>
-    <div class="form-group">
-        {!! Form::label('Author Name', 'Author:') !!}
+        {!! Form::label('Author Name', 'Author Name:') !!}
         {!! Form::text('author_name',null,['class'=>'form-control']) !!}
     </div>
-    <div class="form-group">
-        {!! Form::label('Description', 'description:') !!}
-        {!! Form::text('description',null,['class'=>'form-control']) !!}
-    </div>
-    <div class="form-group">
+   <div class="form-group">
         {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}
