@@ -23,6 +23,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Author::class, function (Faker\Generator $faker) {
     return [
         'author_name' => $faker->name,
+        'updated_at' => $faker->date(),
     ];
 });
 

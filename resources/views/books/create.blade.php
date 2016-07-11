@@ -11,7 +11,7 @@
             </ul>
         </div>
     @endif
-    {!! Form::open(['url' => 'books']) !!}
+    {!! Form::open(['url' => 'books/store']) !!}
     <div class="form-group">
         {!! Form::label('Title', 'Title:') !!}
         {!! Form::text('title',null,['class'=>'form-control']) !!}

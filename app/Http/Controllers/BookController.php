@@ -6,6 +6,7 @@ use Request;
 use Validator;
 use App\Jobs\CreateBook;
 use App\Jobs\DeleteBook;
+use App\Jobs\UpdateBook;
 use App\Book;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,7 @@ class BookController extends Controller {
      */
     public function index()
     {
+        //@todo use eloquent methods to display author of book
         $books = DB::table('books')
                     ->join('authors', 'authors.id', '=', 'books.author_id')
                     ->select('books.id', 'books.title', 'books.description', 'books.author_id','authors.author_name','books.updated_at')
@@ -25,6 +27,7 @@ class BookController extends Controller {
 
         return view('books.index',['books'=>$books]);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -91,9 +94,20 @@ class BookController extends Controller {
     public function update($id)
     {
         $bookUpdate=Request::all();
-        $book=Book::find($id);
 
-        $book->update($bookUpdate);
+        $validator = Validator::make($bookUpdate, [
+            'title' => 'required|max:255',
+            'author_name' => 'required',
+            'description' => 'required|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('books/edit/'.$id)
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $this->dispatch(new UpdateBook($id, $bookUpdate));
 
         return redirect()->route('books');
     }

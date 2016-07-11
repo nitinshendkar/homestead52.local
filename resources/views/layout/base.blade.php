@@ -18,7 +18,7 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#">Home</a></li>
                         <li><a href="/books">Books</a></li>
-                        <li><a href="/author">Authors</a></li>
+                        <li><a href="/authors">Authors</a></li>
                     </ul>
                     <div class="navbar-brand glyphicon glyphicon-off pull-right" href="#">
                         <span class="caption"><a href="{{ route('logout') }}">Logout</a></span>
