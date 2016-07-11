@@ -33,7 +33,14 @@ Route::post('auth/register', ['as'=>'register','uses' =>'Auth\AuthController@pos
 Route::get('home', 'HomeController@index');
 
 Route::get('books',['middleware' => 'auth','uses' => 'BookController@index'] )->name('books');
+Route::get('author',['middleware' => 'auth','uses' => 'AuthorController@index'] )->name('author');
 Route::get('books/edit/{id}',['as'=>'books.edit','middleware' => 'auth','uses' => 'BookController@edit'] );
+Route::get('author/edit/{id}',['as'=>'author.edit','middleware' => 'auth','uses' => 'AuthorController@edit'] );
 Route::delete ('books/destroy/{id}',['as'=>'books.destroy','middleware' => 'auth','uses' => 'BookController@destroy'] );
+Route::delete ('author/destroy/{id}',['as'=>'author.destroy','middleware' => 'auth','uses' => 'AuthorController@destroy'] );
 Route::get('books/create',['as'=>'books.create','middleware' => 'auth','uses' => 'BookController@create'] );
+Route::get('authors/create',['as'=>'authors.create','middleware' => 'auth','uses' => 'AuthorController@create'] );
 Route::patch('books/update/{id}',['as'=>'books.update','middleware' => 'auth','uses' => 'BookController@update'] );
+Route::patch('authors/update/{id}',['as'=>'authors.update','middleware' => 'auth','uses' => 'AuthorController@update'] );
+Route::match (['get', 'post'],'books/store',['as'=>'books.store','middleware' => 'auth','uses' => 'BookController@store'] );
+Route::match (['get', 'post'],'authors/store',['as'=>'authors.store','middleware' => 'auth','uses' => 'AuthorController@store'] );

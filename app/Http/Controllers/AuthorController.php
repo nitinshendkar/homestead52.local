@@ -17,9 +17,9 @@ class AuthorController extends Controller
      */
     public function index()
     {
-//        $books=Book::all();
+        $authors=Author::all();
 
-//        return view('books.index',['books'=>$books]);
+        return view('books.authors',['authors'=>$authors]);
     }
     /**
      * Show the form for creating a new resource.
@@ -28,7 +28,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+        return view('books.create_author');
     }
     /**
      * Store a newly created resource in storage.
@@ -37,11 +37,11 @@ class AuthorController extends Controller
      */
     public function store()
     {
-//        $book=Request::all();
-//
-//        Book::create($book);
-//
-//        return redirect('books');
+        $author=Request::all();
+
+        Author::create($author);
+
+        return redirect('author');
     }
     /**
      * Display the specified resource.
@@ -62,9 +62,9 @@ class AuthorController extends Controller
      */
     public function edit($id)
     {
-/*        $book=Book::find($id);
+        $author=Author::find($id);
 
-        return view('books.edit',compact('book'));*/
+        return view('books.edit_author',compact('author'));
     }
     /**
      * Update the specified resource in storage.
@@ -74,12 +74,12 @@ class AuthorController extends Controller
      */
     public function update($id)
     {
-       /* $bookUpdate=Request::all();
-        $book=Book::find($id);
+        $authorUpdate=Request::all();
+        $author=Author::find($id);
+        
+        $author->update($authorUpdate);
 
-        $book->update($bookUpdate);
-
-        return redirect('books');*/
+        return redirect('author');
     }
     /**
      * Remove the specified resource from storage.
@@ -89,8 +89,8 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
-        /*Book::find($id)->delete();
+        Author::find($id)->delete();
 
-        return redirect('books');*/
+        return redirect('author');
     }
 }

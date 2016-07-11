@@ -10,7 +10,7 @@ class Author extends Model
     public $created_at = false;
     protected $table = 'authors';
     protected $fillable= [
-        'name'
+        'author_name'
     ];
 
     public function book()

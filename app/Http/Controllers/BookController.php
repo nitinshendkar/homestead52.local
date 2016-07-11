@@ -6,6 +6,7 @@ use Request;
 use Validator;
 use App\Jobs\CreateBook;
 use App\Jobs\DeleteBook;
+use App\Jobs\UpdateBook;
 use App\Book;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
@@ -91,9 +92,20 @@ class BookController extends Controller {
     public function update($id)
     {
         $bookUpdate=Request::all();
-        $book=Book::find($id);
 
-        $book->update($bookUpdate);
+        $validator = Validator::make($bookUpdate, [
+            'title' => 'required|max:255',
+            'author_name' => 'required',
+            'description' => 'required|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('books/edit/'.$id)
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $this->dispatch(new UpdateBook($id, $bookUpdate));
 
         return redirect()->route('books');
     }
