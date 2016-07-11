@@ -20,6 +20,9 @@ Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController'
 ]);
+Route::get('/', ['middleware' => 'auth','as'=>'home','uses'=>'HomeController@index']);
+Route::get('home', ['middleware' => 'auth','as'=>'home','uses'=>'HomeController@index']);
+
 
 Route::get('auth/login', ['as'=>'login','uses'=>'Auth\AuthController@getLogin']);
 Route::get('login', 'Auth\AuthController@getLogin'); //@todo for url fetting redirect to only /login
@@ -29,8 +32,6 @@ Route::get('auth/logout', ['as'=>'logout','uses'=>'Auth\AuthController@getLogout
 // Registration routes...
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', ['as'=>'register','uses' =>'Auth\AuthController@postRegister']);
-
-Route::get('home', 'HomeController@index');
 
 Route::get('books',['middleware' => 'auth','uses' => 'BookController@index'] );
 Route::get('books/edit',['as'=>'books.edit','middleware' => 'auth','uses' => 'BookController@index'] );
