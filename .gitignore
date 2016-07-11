@@ -4,5 +4,13 @@
 Homestead.yaml
 Homestead.json
 .env
+
+.idea/blade.xml
+
+.idea/copyright/profiles_settings.xml
+
+.idea/homestead52.local.iml
+
+.idea/modules.xml
 .idea/*
 .idea/workspace.xml

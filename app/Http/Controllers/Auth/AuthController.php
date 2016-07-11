@@ -31,9 +31,6 @@ class AuthController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
-
-//    @todo not working
-//    protected $redirectPath = '/home';
     protected $loginPath = 'auth/login';
 
     /**

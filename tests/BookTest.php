@@ -24,16 +24,21 @@ class BookTest extends TestCase
     }
 
     public function testNewBookCreation() {
-        $this->visit('books/create')
-            ->type('Booktest1', 'title')
-            ->type('102', 'author_id')
-            ->type('Description Test', 'description')
-            ->press('Save')
-            ->seePageIs('/books');
-    }
+        $user = factory(App\User::class)->create();
 
+        $this->actingAs($user)
+             ->visit('books/create')
+             ->type('Booktest1', 'title')
+             ->type('1', 'author_id')
+             ->type('Description Test', 'description')
+             ->press('Save')
+             ->seePageIs('/books');
+    }
+//
     public function testNewBookCreationValidation() {
-        $this->visit('books/create')
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)->visit('books/create')
             ->type('102', 'author_id')
             ->type('Description Test', 'description')
             ->press('Save')
@@ -41,7 +46,10 @@ class BookTest extends TestCase
     }
 
     public function testNewBookDeletion() {
-        $this->visit('books/')
+        $user = factory(App\User::class)->create();
+
+        $this->actingAs($user)
+            ->visit('books/destroy/1')
             ->press('Delete')
             ->seePageIs('/books');
     }

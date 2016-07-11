@@ -25,7 +25,7 @@ Route::get('home', ['middleware' => 'auth','as'=>'home','uses'=>'HomeController@
 
 
 Route::get('auth/login', ['as'=>'login','uses'=>'Auth\AuthController@getLogin']);
-Route::get('login', 'Auth\AuthController@getLogin'); //@todo for url fetting redirect to only /login
+Route::get('login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', ['as'=>'logout','uses'=>'Auth\AuthController@getLogout']);
 
@@ -33,6 +33,16 @@ Route::get('auth/logout', ['as'=>'logout','uses'=>'Auth\AuthController@getLogout
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', ['as'=>'register','uses' =>'Auth\AuthController@postRegister']);
 
-Route::get('books',['middleware' => 'auth','uses' => 'BookController@index'] );
-Route::get('books/edit',['as'=>'books.edit','middleware' => 'auth','uses' => 'BookController@index'] );
-Route::get('books/destroy',['as'=>'books.destroy','middleware' => 'auth','uses' => 'BookController@index'] );
+
+Route::get('home', 'HomeController@index');
+
+Route::get('books',['middleware' => 'auth','uses' => 'BookController@index'] )->name('books');
+Route::post('books',['middleware' => 'auth','uses' => 'BookController@index'] )->name('books');
+Route::get('books/edit/{id}',['as'=>'books.edit','middleware' => 'auth','uses' => 'BookController@edit'] );
+
+Route::delete ('books/destroy/{id}',['as'=>'books.destroy','middleware' => 'auth','uses' => 'BookController@destroy'] );
+//required for unit testing
+Route::get ('books/destroy/{id}',['as'=>'books.destroy','middleware' => 'auth','uses' => 'BookController@destroy'] );
+
+Route::get('books/create',['as'=>'books.create','middleware' => 'auth','uses' => 'BookController@create'] );
+Route::patch('books/update/{id}',['as'=>'books.update','middleware' => 'auth','uses' => 'BookController@update'] );

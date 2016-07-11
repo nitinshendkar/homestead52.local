@@ -13,9 +13,14 @@ class Author extends Model
         'name'
     ];
 
-    public function book()
+    public function books()
     {
         return $this->hasMany('App\book');
     }
 
+//    function save($id){
+//        $author = App\Author::find($id);
+//        $user->authors()->associate($author);
+//        $user->save();
+//    }
 }
