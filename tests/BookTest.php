@@ -6,34 +6,45 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class BookTest extends TestCase
 {
-    private function __create_user(){
-
-        return factory(App\User::class)->create();
+    //@todo mock user with specific criteria & then use it
+    public function mockUser()
+    {
+        $user = factory(App\User::class)->create(
+            [
+                'name'     => 'Angelin'
+            ]
+        );
+        $this->be($user);
     }
+
     /**
      * @test
      */
     public function it_displays_all_books()
     {
 
-        $user = $this->__create_user();
-        $response = $this->actingAs($user)->call('GET', '/books');
+        $user = factory(App\User::class)->create();
+        $response = $this->actingAs($user)
+            ->call('GET', '/books');
+
         $this->assertEquals(200, $response->status());
     }
 
     /**
      * @test
      */
-    public function it_creates_a_new_book() {
+    public function it_creates_a_new_book()
+    {
 
-        $user = $this->__create_user();
+        $user = factory(App\User::class)->create();
         $this->actingAs($user)
-             ->visit('books/create')
-             ->type('Booktest1', 'title')
-             ->type('1', 'author_id')
-             ->type('Description Test', 'description')
-             ->press('Save')
-             ->seePageIs('/books');
+            ->visit('books/create')
+            ->type('Booktest1', 'title')
+            ->type('1', 'author_id')
+            ->type('Description Test', 'description')
+            ->press('Save')
+            ->seePageIs('books')
+            ->seeInDatabase('books', ['title' => 'Booktest1']);
     }
 
     /**
@@ -42,9 +53,9 @@ class BookTest extends TestCase
     public function it_does_not_create_book_without_valid_info()
     {
 
-        $user = $this->__create_user();
+        $user = factory(App\User::class)->create();
         $this->actingAs($user)
-            ->visit('books/create')
+            ->call('books/create')
             ->type('1', 'author_id')
             ->type('Description Test', 'description')
             ->press('Save')
@@ -54,11 +65,21 @@ class BookTest extends TestCase
     /**
      * @test
      */
-    public function it_deletes_a_book() {
+    public function it_does_not_create_book_when_guest()
+    {
+        $this->visit('books/create')
+            ->seePageIs('login');
+    }
 
-        $user = $this->__create_user();
+    /**
+     * @test
+     */
+    public function it_deletes_a_book()
+    {
+
+        $user = factory(App\User::class)->create();
         $this->actingAs($user)
-            ->visit('books/destroy/4')
+            ->delete('books/destroy',['id'=>10])
             ->press('Delete')
             ->seePageIs('/books');
     }

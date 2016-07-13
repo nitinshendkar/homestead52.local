@@ -12,16 +12,23 @@ class CreateBook extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
-    protected $book;
+    protected $title;
+    protected $description;
+    protected $authorId;
+
 
     /**
      * Create a new job instance.
      *
-     * @return void
+     * @param $title
+     * @param $description
+     * @param $authorId
      */
-    public function __construct($book)
+    public function __construct($title, $description, $authorId)
     {
-        $this->book = $book;
+        $this->title = $title;
+        $this->description = $description;
+        $this->authorId = $authorId;
     }
 
     /**
@@ -31,6 +38,10 @@ class CreateBook extends Job implements ShouldQueue
      */
     public function handle()
     {
-        Book::create($this->book);
+        Book::create([
+            'title' => $this->title,
+            'description' => $this->description,
+            'author_id' => $this->authorId,
+        ]);
     }
 }

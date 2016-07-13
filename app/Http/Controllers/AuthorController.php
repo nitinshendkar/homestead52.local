@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 
 use Request;
+use Validator;
 use App\Author;
 use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 
 class AuthorController extends Controller
 {
@@ -76,10 +78,20 @@ class AuthorController extends Controller
     {
         $authorUpdate=Request::all();
         $author=Author::find($id);
-        
+
+        $validator = Validator::make($authorUpdate, [
+            'author_name' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('authors/edit/'.$id)
+                ->withErrors($validator)
+                ->withInput();
+        }
         $author->update($authorUpdate);
 
-        return redirect('authors');
+        return redirect()->route('authors');
+        
     }
     /**
      * Remove the specified resource from storage.

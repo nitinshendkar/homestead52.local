@@ -9,9 +9,15 @@ use App\Jobs\DeleteBook;
 use App\Jobs\UpdateBook;
 use App\Book;
 use App\Http\Requests;
+use App\Http\Requests\CreateBookRequest;
 use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,12 +25,7 @@ class BookController extends Controller {
      */
     public function index()
     {
-        //@todo use eloquent methods to display author of book
-        $books = DB::table('books')
-                    ->join('authors', 'authors.id', '=', 'books.author_id')
-                    ->select('books.id', 'books.title', 'books.description', 'books.author_id','authors.author_name','books.updated_at')
-                    ->get();
-
+        $books = Book::all();
         return view('books.index',['books'=>$books]);
     }
 
@@ -37,52 +38,42 @@ class BookController extends Controller {
     {
         return view('books.create');
     }
+
     /**
      * Store a newly created resource in storage.
      *
+     * @param  CreateBookRequest $request
      * @return Response
      */
-    public function store()
+    public function store(CreateBookRequest $request)
     {
-        $book=Request::all();
-
-        $validator = Validator::make($book, [
-            'title' => 'required|max:255',
-            'author_id' => 'required',
-            'description' => 'required|max:255',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect('books/create')
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $this->dispatch(new CreateBook($book));
-
-        return redirect()->route('books');
+        $this->dispatch(new CreateBook(
+            $request->input('title'), $request->input('description'), $request->input('author_id')
+        ));
+        return redirect()->route('books.index');
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Book $book
      * @return Response
      */
-    public function show($id)
+    public function show(Book $book)
     {
-        //
+        return view('books.show',compact('book'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Book $book
      * @return Response
      */
-    public function edit($id)
+//    @todo implement using form request validation
+//    public function edit(Book $book)
+    public function edit(Book $book)
     {
-        $book=Book::find($id);
-
         return view('books.edit',compact('book'));
     }
     /**
@@ -91,7 +82,7 @@ class BookController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update(Book $book)
     {
         $bookUpdate=Request::all();
 
@@ -102,12 +93,12 @@ class BookController extends Controller {
         ]);
 
         if ($validator->fails()) {
-            return redirect('books/edit/'.$id)
+            return redirect('books/'.$book.'edit')
                 ->withErrors($validator)
                 ->withInput();
         }
 
-        $this->dispatch(new UpdateBook($id, $bookUpdate));
+        $this->dispatch(new UpdateBook($book, $bookUpdate));
 
         return redirect()->route('books');
     }
@@ -117,9 +108,9 @@ class BookController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Book $book)
     {
-        $this->dispatch(new DeleteBook($id));
-        return redirect()->route('books');
+        $this->dispatch(new DeleteBook($book));
+        return redirect()->route('books.index');
     }
 }

@@ -14,7 +14,7 @@ class Book extends Model
         'description'
     ];
 
-    public function authors()
+    public function author()
     {
         return $this->belongsTo('App\author');
     }

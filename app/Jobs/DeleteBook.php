@@ -17,11 +17,11 @@ class DeleteBook extends Job implements ShouldQueue
      *
      * @return void
      */
-    protected $book_id;
+    protected $book;
 
-    public function __construct($book_id)
+    public function __construct($book)
     {
-        $this->book_id = $book_id;
+        $this->book = $book;
     }
 
     /**
@@ -31,6 +31,6 @@ class DeleteBook extends Job implements ShouldQueue
      */
     public function handle()
     {
-        Book::find($this->book_id)->delete();
+        $this->book->delete();
     }
 }
