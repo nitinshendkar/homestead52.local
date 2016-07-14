@@ -1,7 +1,10 @@
 @extends('layout/base')
-@section('content')
-    <h1>Update Book</h1>
 
+@section('header')
+    <h1>Update Book</h1>
+@endsection
+
+@section('content')
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -18,7 +21,7 @@
     </div>
     <div class="form-group">
         {!! Form::label('Author Name', 'Author:') !!}
-        {!! Form::text('author_name',null,['class'=>'form-control']) !!}
+        {!! Form::text('author_id',null,['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('Description', 'description:') !!}

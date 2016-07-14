@@ -10,6 +10,6 @@ class Author extends Model
     public $created_at = false;
     protected $table = 'authors';
     protected $fillable= [
-        'author_name'
+        'name'
     ];
 }

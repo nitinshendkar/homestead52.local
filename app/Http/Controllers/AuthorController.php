@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
-
 use Request;
 use Validator;
+use App\Jobs\CreateAuthor;
+use App\Jobs\DeleteAuthor;
+use App\Jobs\UpdateAuthor;
 use App\Author;
 use App\Http\Requests;
+use App\Http\Requests\CreateAuthorRequest;
 use Illuminate\Support\Facades\DB;
 
-class AuthorController extends Controller
-{
+class AuthorController extends Controller {
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -19,10 +25,10 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $authors=Author::all();
-
+        $authors = Author::all();
         return view('authors.index',['authors'=>$authors]);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -32,40 +38,40 @@ class AuthorController extends Controller
     {
         return view('authors.create');
     }
+
     /**
      * Store a newly created resource in storage.
      *
+     * @param  CreateAuthorRequest $request
      * @return Response
      */
-    public function store()
+    public function store(CreateAuthorRequest $request)
     {
-        $author=Request::all();
-
-        Author::create($author);
-
-        return redirect('authors');
+        $this->dispatch(new CreateAuthor(
+            $request->input('title'), $request->input('description'), $request->input('author_id')
+        ));
+        return redirect()->route('authors.index');
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Author $author
      * @return Response
      */
-    public function show($id)
+    public function show(Author $author)
     {
-        //
+        return view('authors.show',compact('author'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Author $author
      * @return Response
      */
-    public function edit($id)
+    public function edit(Author $author)
     {
-        $author=Author::find($id);
-
         return view('authors.edit',compact('author'));
     }
     /**
@@ -73,25 +79,13 @@ class AuthorController extends Controller
      *
      * @param  int  $id
      * @return Response
+     *
      */
-    public function update($id)
+    public function update($authorId, CreateAuthorRequest $request)
     {
-        $authorUpdate=Request::all();
-        $author=Author::find($id);
 
-        $validator = Validator::make($authorUpdate, [
-            'author_name' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect('authors/edit/'.$id)
-                ->withErrors($validator)
-                ->withInput();
-        }
-        $author->update($authorUpdate);
-
-        return redirect()->route('authors');
-        
+        $this->dispatch(new UpdateAuthor($authorId,$request->input('title'), $request->input('description'), $request->input('author_id')));
+        return redirect()->route('authors.show',$authorId);
     }
     /**
      * Remove the specified resource from storage.
@@ -101,8 +95,7 @@ class AuthorController extends Controller
      */
     public function destroy($id)
     {
-        Author::find($id)->delete();
-
-        return redirect('authors');
+        $this->dispatch(new DeleteAuthor($id));
+        return redirect()->route('authors.index');
     }
 }

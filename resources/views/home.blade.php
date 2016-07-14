@@ -1,5 +1,5 @@
+@extends('layout/base')
 
-@extends('layout.base')
 @section('content')
-    <div class="">You are home</div>
+    <h1>You are Home</h1>
 @stop

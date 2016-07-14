@@ -1,10 +1,11 @@
 
 @extends('layout/base')
 
+@section('header')
+    <h1>Book's Store</h1>
+@endsection
 
 @section('content')
-    <h1>BookStore</h1>
-
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -33,7 +34,7 @@
             <tr>
                 <td>{{ $book->id }}</td>
                 <td>{{ $book->title }}</td>
-                <td>{{ $book->author->name }}</td>
+                <td><a href="{{route('authors.show',$book->author->id)}}"> {{$book->author->name }}</a></td>
                 <td>{{ $book->description }}</td>
                 <td><a href="{{route('books.edit',$book->id)}}" class="btn btn-warning">Update</a></td>
 

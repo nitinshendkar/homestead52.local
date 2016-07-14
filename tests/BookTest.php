@@ -50,16 +50,13 @@ class BookTest extends TestCase
     /**
      * @test
      */
-    public function it_does_not_create_book_without_valid_info()
+   public function it_does_not_create_book_without_valid_info()
     {
 
         $user = factory(App\User::class)->create();
-        $this->actingAs($user)
-            ->call('books/create')
-            ->type('1', 'author_id')
-            ->type('Description Test', 'description')
-            ->press('Save')
-            ->see('The title field is required.');
+        $this->actingAs($user);
+            $response = $this->call('POST','books',['author_id'=>'1','description'=>'Description Test']);
+            $this->assertEquals(302, $response->status());
     }
 
     /**
@@ -76,10 +73,9 @@ class BookTest extends TestCase
      */
     public function it_deletes_a_book()
     {
-
         $user = factory(App\User::class)->create();
         $this->actingAs($user)
-            ->delete('books/destroy',['id'=>10])
+            ->visit('books')
             ->press('Delete')
             ->seePageIs('/books');
     }

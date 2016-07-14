@@ -10,6 +10,10 @@
 <body>
 <div class="container">
     @yield('toolbar')
+    <div class="top-10">
+        <br><br><br>
+        <h4>@yield('header')</h4>
+    </div>
     @yield('content')
 </div>
 </body>

@@ -1,7 +1,11 @@
 
 @extends('layout/base')
+@section('header')
+    Create Book
+@endsection
+
 @section('content')
-    <h1>Create Book</h1>
+
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -12,6 +16,7 @@
         </div>
     @endif
     <div class="centered col-md-4 col-md-offset-4 top_50">
+
         {!! Form::open(['route' => 'books.store']) !!}
         <div>
             {!! Form::label('Title', 'Title:') !!}

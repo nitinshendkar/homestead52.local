@@ -3,13 +3,13 @@
 namespace App\Jobs;
 
 use App\Jobs\Job;
-use App\Book;
+use App\Author;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 
-class DeleteBook extends Job implements ShouldQueue
+class DeleteAuthor extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
@@ -18,11 +18,11 @@ class DeleteBook extends Job implements ShouldQueue
      *
      * @return void
      */
-    protected $bookId;
+    protected $id;
 
-    public function __construct($bookId)
+    public function __construct($id)
     {
-        $this->bookId = $bookId;
+        $this->id = $id;
     }
 
     /**
@@ -32,7 +32,7 @@ class DeleteBook extends Job implements ShouldQueue
      */
     public function handle()
     {
-        $book=Book::find($this->bookId);
-        $book->delete();
+        $author = Author::find($this->id);
+        $author->delete();
     }
 }

@@ -29,11 +29,6 @@ class BookController extends Controller {
         return view('books.index',['books'=>$books]);
     }
 
-    public function index1()
-    {
-        $books = Book::all();
-        return view('books.index',['books'=>$books]);
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -75,7 +70,6 @@ class BookController extends Controller {
      * @param  Book $book
      * @return Response
      */
-//    @todo implement using form request validation
     public function edit(Book $book)
     {
         return view('books.edit',compact('book'));
@@ -85,25 +79,13 @@ class BookController extends Controller {
      *
      * @param  int  $id
      * @return Response
+     *
      */
-    public function update(Book $book)
+    public function update($bookId, CreateBookRequest $request)
     {
-        $bookUpdate=Request::all();
 
-        $validator = Validator::make($bookUpdate, [
-            'title' => 'required|max:255',
-            'author_name' => 'required',
-            'description' => 'required|max:255',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect('books/'.$book.'edit')
-                ->withErrors($validator)
-                ->withInput();
-        }
-
-        $this->dispatch(new UpdateBook($book, $bookUpdate));
-        return redirect()->route('books');
+        $this->dispatch(new UpdateBook($bookId,$request->input('title'), $request->input('description'), $request->input('author_id')));
+        return redirect()->route('books.show',$bookId);
     }
     /**
      * Remove the specified resource from storage.
@@ -111,9 +93,9 @@ class BookController extends Controller {
      * @param  int  $id
      * @return Response
      */
-    public function destroy(Book $book)
+    public function destroy($id)
     {
-        $this->dispatch(new DeleteBook($book));
+        $this->dispatch(new DeleteBook($id));
         return redirect()->route('books.index');
     }
 }
