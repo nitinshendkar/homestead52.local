@@ -29,6 +29,11 @@ class BookController extends Controller {
         return view('books.index',['books'=>$books]);
     }
 
+    public function index1()
+    {
+        $books = Book::all();
+        return view('books.index',['books'=>$books]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -48,7 +53,7 @@ class BookController extends Controller {
     public function store(CreateBookRequest $request)
     {
         $this->dispatch(new CreateBook(
-            $request->input('title'), $request->input('description'), $request->input('author_id')
+                $request->input('title'), $request->input('description'), $request->input('author_id')
         ));
         return redirect()->route('books.index');
     }
@@ -71,7 +76,6 @@ class BookController extends Controller {
      * @return Response
      */
 //    @todo implement using form request validation
-//    public function edit(Book $book)
     public function edit(Book $book)
     {
         return view('books.edit',compact('book'));
@@ -99,7 +103,6 @@ class BookController extends Controller {
         }
 
         $this->dispatch(new UpdateBook($book, $bookUpdate));
-
         return redirect()->route('books');
     }
     /**

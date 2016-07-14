@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class CreateBookRequest extends Request
+class CreateAuthorRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class CreateBookRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,9 +24,7 @@ class CreateBookRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|max:255',
-            'author_id' => 'required',
-            'description' => 'required|max:255',
+            //
         ];
     }
 }
