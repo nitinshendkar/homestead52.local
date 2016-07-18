@@ -31,9 +31,8 @@ class UpdateAuthor extends Job implements ShouldQueue
      */
     public function handle()
     {
-        $book=Author::find($this->id);
-        $book->id = $this->id;
-        $book->name = $this->name;
-        $book->save();
+        $author=Author::find($this->id);
+        $author->name = $this->name;
+        $author->save();
     }
 }

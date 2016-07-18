@@ -39,8 +39,10 @@ Route::patch('books/{book}', ['as' => 'books.update', 'uses' => 'BookController@
 
 //Authors
 Route::get('authors', ['as' => 'authors.index', 'uses' => 'AuthorController@index']);
+Route::post('authors', ['as' => 'authors.store', 'uses' => 'AuthorController@store']);
+Route::get('authors/create', ['as' => 'authors.create', 'uses' => 'AuthorController@create']);
+Route::get('authors/{author}/edit', ['as' => 'authors.edit', 'uses' => 'AuthorController@edit']);
 Route::get('authors/{author}', ['as' => 'authors.show', 'uses' => 'AuthorController@show']);
-Route::post('authors/{author}/edit', ['as' => 'authors.edit', 'uses' => 'AuthorController@edit']);
 Route::delete('authors/{author}', ['as' => 'authors.destroy', 'uses' => 'AuthorController@destroy']);
 Route::patch('authors/{author}', ['as' => 'authors.update', 'uses' => 'AuthorController@update']);
 

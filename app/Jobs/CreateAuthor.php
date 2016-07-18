@@ -12,7 +12,6 @@ class CreateAuthor extends Job implements ShouldQueue
 {
     use InteractsWithQueue, SerializesModels;
 
-    protected $id;
     protected $name;
 
     /**
@@ -21,9 +20,8 @@ class CreateAuthor extends Job implements ShouldQueue
      * @param $id
      * @param $name
      */
-    public function __construct($id,$name)
+    public function __construct($name)
     {
-        $this->id = $id;
         $this->name = $name;
     }
 
@@ -35,7 +33,6 @@ class CreateAuthor extends Job implements ShouldQueue
     public function handle()
     {
         Author::create([
-            'id' => $this->id,
             'name' => $this->name
         ]);
     }

@@ -48,7 +48,7 @@ class AuthorController extends Controller {
     public function store(CreateAuthorRequest $request)
     {
         $this->dispatch(new CreateAuthor(
-            $request->input('title'), $request->input('description'), $request->input('author_id')
+            $request->input('name')
         ));
         return redirect()->route('authors.index');
     }
@@ -84,7 +84,7 @@ class AuthorController extends Controller {
     public function update($authorId, CreateAuthorRequest $request)
     {
 
-        $this->dispatch(new UpdateAuthor($authorId,$request->input('title'), $request->input('description'), $request->input('author_id')));
+        $this->dispatch(new UpdateAuthor($authorId, $request->input('name')));
         return redirect()->route('authors.show',$authorId);
     }
     /**
