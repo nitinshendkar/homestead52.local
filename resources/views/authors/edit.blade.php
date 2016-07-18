@@ -14,7 +14,7 @@
     {!! Form::model($author,['method' => 'PATCH','route'=>['authors.update',$author->id]]) !!}
     <div class="form-group">
         {!! Form::label('Author Name', 'Author Name:') !!}
-        {!! Form::text('author_name',null,['class'=>'form-control']) !!}
+        {!! Form::text('name',null,['class'=>'form-control']) !!}
     </div>
    <div class="form-group">
         {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}

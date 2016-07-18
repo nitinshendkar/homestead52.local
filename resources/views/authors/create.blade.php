@@ -14,7 +14,7 @@
     {!! Form::open(['route' => 'authors.store']) !!}
     <div class="form-group">
         {!! Form::label('Author Name', 'Author Name:') !!}
-        {!! Form::text('author_name',null,['class'=>'form-control']) !!}
+        {!! Form::text('name',null,['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::submit('Save', ['class' => 'btn btn-primary form-control']) !!}

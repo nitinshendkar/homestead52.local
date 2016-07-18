@@ -1,10 +1,6 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-
-class authorTest extends TestCase
+class AuthorTest extends TestCase
 {
     private function __create_user(){
 
@@ -26,12 +22,13 @@ class authorTest extends TestCase
      */
     public function it_creates_a_new_author() {
 
-        $user = $this->__create_user();
+        $user = factory(App\User::class)->create();
         $this->actingAs($user)
              ->visit('authors/create')
-             ->type('authortest1', 'author_name')
+             ->type('authortest1', 'name')
              ->press('Save')
-             ->seePageIs('/authors');
+             ->seePageIs('authors')
+             ->seeInDatabase('authors', ['name' => 'authortest1']);
     }
 
     /**
@@ -42,9 +39,9 @@ class authorTest extends TestCase
 
         $user = $this->__create_user();
         $this->actingAs($user)
-            ->visit('authors/create')
-            ->press('Save')
-            ->see('The name field is required.');
+             ->visit('authors/create')
+             ->press('Save')
+             ->see('The name field is required.');
     }
 
     /**
@@ -52,11 +49,11 @@ class authorTest extends TestCase
      */
     public function it_deletes_a_author() {
 
-        $user = $this->__create_user();
+      $user = factory(App\User::class)->create();
         $this->actingAs($user)
-            ->visit('authors/destroy/4')
-            ->press('Delete')
-            ->seePageIs('/authors');
+             ->visit('authors')
+             ->press('Delete')
+             ->seePageIs('/authors');
     }
 
 }

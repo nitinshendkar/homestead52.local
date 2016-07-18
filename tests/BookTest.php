@@ -40,7 +40,7 @@ class BookTest extends TestCase
         $this->actingAs($user)
             ->visit('books/create')
             ->type('Booktest1', 'title')
-            ->type('1', 'author_id')
+            ->type('10', 'author_id')
             ->type('Description Test', 'description')
             ->press('Save')
             ->seePageIs('books')
