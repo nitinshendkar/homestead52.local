@@ -42,6 +42,6 @@
         @endforeach
 
         </tbody>
-
     </table>
+    {{ $authors->appends(['sort' => 'updated_at'])->render() }}
 @endsection

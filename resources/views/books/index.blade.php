@@ -49,4 +49,6 @@
         </tbody>
 
     </table>
+
+    {{ $books->appends(['sort' => 'updated_at'])->render() }}
 @endsection
