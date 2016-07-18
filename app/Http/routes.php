@@ -35,12 +35,14 @@ Route::get('books/create', ['as' => 'books.create', 'uses' => 'BookController@cr
 Route::get('books/{book}/edit', ['as' => 'books.edit', 'uses' => 'BookController@edit']);
 Route::get('books/{book}', ['as' => 'books.show', 'uses' => 'BookController@show']);
 Route::delete('books/{book}', ['as' => 'books.destroy', 'uses' => 'BookController@destroy']);
-Route::patch('books/{book}', ['as' => 'books.update', 'BookController@update']);
+Route::patch('books/{book}', ['as' => 'books.update', 'uses' => 'BookController@update']);
 
 //Authors
 Route::get('authors', ['as' => 'authors.index', 'uses' => 'AuthorController@index']);
+Route::post('authors', ['as' => 'authors.store', 'uses' => 'AuthorController@store']);
+Route::get('authors/create', ['as' => 'authors.create', 'uses' => 'AuthorController@create']);
+Route::get('authors/{author}/edit', ['as' => 'authors.edit', 'uses' => 'AuthorController@edit']);
 Route::get('authors/{author}', ['as' => 'authors.show', 'uses' => 'AuthorController@show']);
-Route::post('authors/{author}/edit', ['as' => 'authors.edit', 'AuthorController@edit']);
-Route::delete('authors/{author}', ['as' => 'authors.destroy', 'AuthorController@destroy']);
-Route::patch('authors/{author}', ['as' => 'authors.update', 'AuthorController@update']);
+Route::delete('authors/{author}', ['as' => 'authors.destroy', 'uses' => 'AuthorController@destroy']);
+Route::patch('authors/{author}', ['as' => 'authors.update', 'uses' => 'AuthorController@update']);
 
