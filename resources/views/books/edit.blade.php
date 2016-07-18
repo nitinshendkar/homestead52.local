@@ -21,7 +21,7 @@
     </div>
     <div class="form-group">
         {!! Form::label('Author Name', 'Author:') !!}
-        {!! Form::text('author_id',null,['class'=>'form-control']) !!}
+        {{ Form::select('author_id', $book->authors, null, array('class'=>'form-control')) }}
     </div>
     <div class="form-group">
         {!! Form::label('Description', 'description:') !!}

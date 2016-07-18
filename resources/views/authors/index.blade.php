@@ -30,7 +30,7 @@
         @foreach ($authors as $author)
             <tr>
                 <td>{{ $author->id }}</td>
-                <td>{{ $author->author_name }}</td>
+                <td>{{ $author->name }}</td>
                 <td><a href="{{route('authors.edit',$author->id)}}" class="btn btn-warning">Update</a></td>
 
                 <td>

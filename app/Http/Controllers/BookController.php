@@ -8,16 +8,19 @@ use App\Jobs\CreateBook;
 use App\Jobs\DeleteBook;
 use App\Jobs\UpdateBook;
 use App\Book;
+use App\Author;
 use App\Http\Requests;
 use App\Http\Requests\CreateBookRequest;
 use Illuminate\Support\Facades\DB;
 
-class BookController extends Controller {
+class BookController extends Controller
+{
 
     public function __construct()
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +29,7 @@ class BookController extends Controller {
     public function index()
     {
         $books = Book::all();
-        return view('books.index',['books'=>$books]);
+        return view('books.index', ['books' => $books]);
     }
 
     /**
@@ -48,7 +51,7 @@ class BookController extends Controller {
     public function store(CreateBookRequest $request)
     {
         $this->dispatch(new CreateBook(
-                $request->input('title'), $request->input('description'), $request->input('author_id')
+            $request->input('title'), $request->input('description'), $request->input('author_id')
         ));
         return redirect()->route('books.index');
     }
@@ -61,7 +64,7 @@ class BookController extends Controller {
      */
     public function show(Book $book)
     {
-        return view('books.show',compact('book'));
+        return view('books.show', compact('book'));
     }
 
     /**
@@ -72,25 +75,30 @@ class BookController extends Controller {
      */
     public function edit(Book $book)
     {
-        return view('books.edit',compact('book'));
+        foreach (Author::all() as $author) {
+            $authors[$author->id] = $author->name;
+        }
+        $book->authors = $authors;
+        return view('books.edit', compact('book'));
     }
+
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      *
      */
     public function update($bookId, CreateBookRequest $request)
     {
-
-        $this->dispatch(new UpdateBook($bookId,$request->input('title'), $request->input('description'), $request->input('author_id')));
-        return redirect()->route('books.show',$bookId);
+       $this->dispatch(new UpdateBook($bookId, $request->input('title'), $request->input('description'), $request->input('author_id')));
+        return redirect()->route('books.show', $bookId);
     }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)
