@@ -17,8 +17,8 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class=""><a href="/home">Home</a></li>
-                        <li><a href="/books">Books</a></li>
-                        <li><a href="/authors">Authors</a></li>
+                        <li><a href="/books">Users</a></li>
+                        <li><a href="/authors">Authors</a></li><li><a href="/resetpassword">Reset Password</a></li>
                     </ul>
                     <div class="navbar-brand glyphicon glyphicon-off pull-right" href="#">
                         <span class="caption"><a href="{{ route('logout') }}">Logout</a></span>

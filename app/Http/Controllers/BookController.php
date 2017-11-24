@@ -28,8 +28,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::paginate(10);
-        return view('books.index', ['books' => $books]);
+        $users = \App\User::paginate(10);
+        return view('books.index', ['users' => $users]);
     }
 
     /**

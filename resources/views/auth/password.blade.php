@@ -1,43 +1,46 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: angelin
- * Date: 06/07/16
- * Time: 5:57 PM
- */
+@extends('layout.base')
+@section('content')
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="centered col-md-4 col-md-offset-4 text-center top_50">
+            <div id="logo-container"></div>
+            <div class="col-sm-12 col-md-10 ">
+                <form method="POST" action="/password/reset" >
+                    {!! csrf_field() !!}
 
-<!-- resources/views/auth/reset.blade.php -->
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">Select User</span>
+                        <select class="form-control" name="end_user" >
+                            <option class="form-control">Test User</option>
+                        </select>
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">Email</span>
+                        <input class="form-control" type="email" name="email" value="{{ old('email') }}">
 
-<form method="POST" action="/password/reset">
-    {!! csrf_field() !!}
-    <input type="hidden" name="token" value="{{ $token }}">
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">New Password</span>
+                        <input class="form-control" type="password" name="password">
 
-    @if (count($errors) > 0)
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+                    </div>
+                    <div class="form-group input-group">
+                        <span class="input-group-addon">Confirm Password</span>
+                        <input class="form-control" type="password" name="password_confirmation">
 
-    <div>
-        Email
-        <input type="email" name="email" value="{{ old('email') }}">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-default "  type="submit">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <div>
-        Password
-        <input type="password" name="password">
-    </div>
-
-    <div>
-        Confirm Password
-        <input type="password" name="password_confirmation">
-    </div>
-
-    <div>
-        <button type="submit">
-            Reset Password
-        </button>
-    </div>
-</form>
+</div>
+@endsection
