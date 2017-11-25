@@ -21,6 +21,7 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\ExecutePayment;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
+
 class AddMoneyController extends HomeController
 {
     private $_api_context;
@@ -116,7 +117,7 @@ class AddMoneyController extends HomeController
         $payment_id = Session::get('paypal_payment_id');
         /** clear the session payment ID **/
         Session::forget('paypal_payment_id');
-        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+        if (empty(\Illuminate\Support\Facades\Input::get('PayerID')) || empty(\Illuminate\Support\Facades\Input::get('token'))) {
             \Session::put('error','Payment failed');
             return Redirect::route('addmoney.paywithpaypal');
         }

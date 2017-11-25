@@ -1,4 +1,19 @@
-@extends('layouts.app')
+@extends('layout/base')
+
+@section('header')
+    <h1>Make Payment</h1>
+@endsection
+
+@section('content')
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 @section('content')
 <div class="container">
     <div class="row">

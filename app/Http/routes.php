@@ -33,19 +33,11 @@ Route::get('home', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('books', ['as' => 'books.index', 'uses' => 'BookController@index']);
 Route::post('books', ['as' => 'books.store', 'uses' => 'BookController@store']);
 Route::get('books/create', ['as' => 'books.create', 'uses' => 'BookController@create']);
-Route::get('books/{book}/edit', ['as' => 'books.edit', 'uses' => 'BookController@edit']);
-Route::get('books/{book}', ['as' => 'books.show', 'uses' => 'BookController@show']);
-Route::delete('books/{book}', ['as' => 'books.destroy', 'uses' => 'BookController@destroy']);
-Route::patch('books/{book}', ['as' => 'books.update', 'uses' => 'BookController@update']);
-
-//Authors
-Route::get('authors', ['as' => 'authors.index', 'uses' => 'AuthorController@index']);
-Route::post('authors', ['as' => 'authors.store', 'uses' => 'AuthorController@store']);
-Route::get('authors/create', ['as' => 'authors.create', 'uses' => 'AuthorController@create']);
-Route::get('authors/{author}/edit', ['as' => 'authors.edit', 'uses' => 'AuthorController@edit']);
-Route::get('authors/{author}', ['as' => 'authors.show', 'uses' => 'AuthorController@show']);
-Route::delete('authors/{author}', ['as' => 'authors.destroy', 'uses' => 'AuthorController@destroy']);
-Route::patch('authors/{author}', ['as' => 'authors.update', 'uses' => 'AuthorController@update']);
+Route::get('books/edit/{user}', ['as' => 'books.edit', 'uses' => 'BookController@edit']);
+Route::delete('books/{user}', ['as' => 'books.destroy', 'uses' => 'BookController@destroy']);
+Route::patch('books/{user}', ['as' => 'books.update', 'uses' => 'BookController@update']);
+Route::get('search', ['as' => 'search.show', 'uses' => 'SearchUser@index']);
+Route::POST('search/find', ['as' => 'search.find', 'uses' => 'SearchUser@getUser']);
 
 Route::get('paywithpaypal', array('as' => 'addmoney.paywithpaypal','uses' => 'AddMoneyController@payWithPaypal',));
 Route::post('paypal', array('as' => 'addmoney.paypal','uses' => 'AddMoneyController@postPaymentWithpaypal',));
