@@ -52,8 +52,8 @@
                 <td>{{ $user->dob }}</td>
                 <td>{{ $user->doj }}</td>
         
-                <td><?php echo '<img width=100 height=100 src="data:image/jpeg;base64,'.base64_encode( $user->photo ).'"/>'; ?></td>
-                <td><?php echo '<img width=100 height=100 src="data:image/jpeg;base64,'.base64_encode( $user->signature ).'"/>'; ?></td>
+                <td><?php echo '<img width=100 height=100 src="data:'.$user->photo_type.';base64,' .$user->photo .'"/>'; ?></td>
+                <td><?php echo '<img width=100 height=100 src="data:'.$user->signature_type.';base64,'. $user->signature .'"/>'; ?></td>
                 <td>{{ $user->email }}</td>
                 
                 

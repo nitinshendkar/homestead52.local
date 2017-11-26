@@ -2,13 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Request;
-use Validator;
-use App\Jobs\CreateBook;
-use App\Jobs\DeleteBook;
-use App\Jobs\UpdateBook;
-use App\Book;
-use App\Author;
+
+use App\User;
 use App\Http\Requests;
 use App\Http\Requests\CreateBookRequest;
 use Illuminate\Support\Facades\DB;
@@ -28,7 +23,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $users = \App\User::paginate(10);
+        $users = \App\User::paginate(1);
         return view('books.index', ['users' => $users]);
     }
 
@@ -50,9 +45,32 @@ class BookController extends Controller
      */
     public function store(CreateBookRequest $request)
     {
-        $this->dispatch(new CreateBook(
-            $request->input('title'), $request->input('description'), $request->input('author_id')
-        ));
+        
+        $profilePhoto = file_get_contents($request->profile_photo->getPathname());
+        $profilePhotoType = $request->profile_photo->getClientMimeType();
+        $profilePhotoEncode = base64_encode($profilePhoto);
+        
+        $signaturePhoto = file_get_contents($request->profile_signature->getPathname());
+        $signaturePhotoType = $request->profile_signature->getClientMimeType();
+        $signaturePhotoEncode = base64_encode($signaturePhoto);
+        
+        User::create([
+            'name' => $request->first_name,
+            'lastname' => $request->last_name,
+            'office_address' => $request->office_address,
+            'home_address' => $request->home_address,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'role' => $request->role,
+            'emp_id' => $request->emp_id,
+            'dob' => $request->dob,
+            'doj' => $request->doj,
+            'photo' => $profilePhotoEncode,
+            'photo_type' => $profilePhotoType,
+            'signature' => $signaturePhotoEncode,
+            'signature_type' => $signaturePhotoType,
+            'password' => bcrypt($request->password),
+        ]);
         return redirect()->route('books.index');
     }
 
@@ -73,13 +91,9 @@ class BookController extends Controller
      * @param  Book $book
      * @return Response
      */
-    public function edit(Book $book)
+    public function edit(User $user)
     {
-        foreach (Author::all() as $author) {
-            $authors[$author->id] = $author->name;
-        }
-        $book->authors = $authors;
-        return view('books.edit', compact('book'));
+      return view('books.edit', compact('user'));
     }
 
     /**
@@ -91,8 +105,33 @@ class BookController extends Controller
      */
     public function update($bookId, CreateBookRequest $request)
     {
-       $this->dispatch(new UpdateBook($bookId, $request->input('title'), $request->input('description'), $request->input('author_id')));
-        return redirect()->route('books.show', $bookId);
+      
+        $user = User::find($bookId);
+        $profilePhoto = file_get_contents($request->profile_photo->getPathname());
+        $profilePhotoType = $request->profile_photo->getClientMimeType();
+        $profilePhotoEncode = base64_encode($profilePhoto);
+        
+        $signaturePhoto = file_get_contents($request->profile_signature->getPathname());
+        $signaturePhotoType = $request->profile_signature->getClientMimeType();
+        $signaturePhotoEncode = base64_encode($signaturePhoto);
+       
+            $user->name = $request->first_name;
+            $user->lastname = $request->last_name;
+            $user->office_address = $request->office_address;
+            $user->home_address = $request->home_address;
+            $user->phone = $request->phone;
+            $user->email = $request->email;
+            $user->role = $request->role;
+            $user->emp_id = $request->emp_id;
+            $user->dob = $request->dob;
+            $user->doj = $request->doj;
+            $user->photo = $profilePhotoEncode;
+            $user->photo_type = $profilePhotoType;
+            $user->signature = $signaturePhotoEncode;
+            $user->signature_type = $signaturePhotoType;
+            
+        $user->save();
+        return redirect()->route('books.index');
     }
 
     /**
@@ -103,7 +142,7 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        $this->dispatch(new DeleteBook($id));
+        User::find($id)->delete();
         return redirect()->route('books.index');
     }
 }
