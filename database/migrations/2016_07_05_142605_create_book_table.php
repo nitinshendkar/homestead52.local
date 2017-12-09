@@ -12,7 +12,7 @@ class CreateBookTable extends Migration
      */
     public function up()
     {
-        Schema::create('books', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title',50);
             $table->char('description' , 100);
@@ -32,6 +32,6 @@ class CreateBookTable extends Migration
     {
         //@todo drop foreign key: author_id
 
-        Schema::drop('books');
+        Schema::drop('users');
     }
 }

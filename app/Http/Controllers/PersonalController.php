@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Requests;
-use App\Http\Requests\CreateBookRequest;
+use App\Http\Requests\CreatePersonalRequest;
 use Illuminate\Support\Facades\DB;
 
-class BookController extends Controller
+class PersonalController extends Controller
 {
 
     public function __construct()
@@ -24,7 +24,7 @@ class BookController extends Controller
     public function index()
     {
         $users = \App\User::paginate(1);
-        return view('books.index', ['users' => $users]);
+        return view('users.index', ['users' => $users]);
     }
 
     /**
@@ -34,7 +34,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        return view('books.create');
+        return view('users.create');
     }
 
     /**
@@ -71,7 +71,7 @@ class BookController extends Controller
             'signature_type' => $signaturePhotoType,
             'password' => bcrypt($request->password),
         ]);
-        return redirect()->route('books.index');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -82,7 +82,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        return view('books.show', compact('book'));
+        return view('users.show', compact('book'));
     }
 
     /**
@@ -93,7 +93,7 @@ class BookController extends Controller
      */
     public function edit(User $user)
     {
-      return view('books.edit', compact('user'));
+      return view('users.edit', compact('user'));
     }
 
     /**
@@ -131,7 +131,7 @@ class BookController extends Controller
             $user->signature_type = $signaturePhotoType;
             
         $user->save();
-        return redirect()->route('books.index');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -143,6 +143,6 @@ class BookController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('books.index');
+        return redirect()->route('users.index');
     }
 }

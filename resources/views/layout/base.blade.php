@@ -17,14 +17,12 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class=""><a href="/home">Home</a></li>
-                        <li><a href="/books">Users</a></li><li><a href="{{ route('search.show')}}">Finder</a></li>
+                        <li><a href="/users">Users <br>Profile</a></li><li><a href="/users">&nbsp; <br>Education</a></li><li><a href="/users">&nbsp; <br>Personal</a></li><li><a href="/users">&nbsp; <br>Bank</a></li><li><a href="/users">&nbsp; <br>professional</a></li><li><a href="{{ route('search.show')}}">Finder</a></li>
                         <li><a href="/paywithpaypal">Make <br>Payment</a></li>
                     </ul>
                     <div class="navbar-brand glyphicon glyphicon-off pull-right" href="#">
                         <span class="caption"><a href="{{ route('logout') }}">Logout</a></span>
                     </div>
-
-
 
                 </div><!--/.nav-collapse -->
             </div>

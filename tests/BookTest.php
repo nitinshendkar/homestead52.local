@@ -20,12 +20,12 @@ class BookTest extends TestCase
     /**
      * @test
      */
-    public function it_displays_all_books()
+    public function it_displays_all_users()
     {
 
         $user = factory(App\User::class)->create();
         $response = $this->actingAs($user)
-            ->call('GET', '/books');
+            ->call('GET', '/users');
 
         $this->assertEquals(200, $response->status());
     }
@@ -38,13 +38,13 @@ class BookTest extends TestCase
 
         $user = factory(App\User::class)->create();
         $this->actingAs($user)
-            ->visit('books/create')
+            ->visit('users/create')
             ->type('Booktest1', 'title')
             ->type('10', 'author_id')
             ->type('Description Test', 'description')
             ->press('Save')
-            ->seePageIs('books')
-            ->seeInDatabase('books', ['title' => 'Booktest1']);
+            ->seePageIs('users')
+            ->seeInDatabase('users', ['title' => 'Booktest1']);
     }
 
     /**
@@ -55,7 +55,7 @@ class BookTest extends TestCase
 
         $user = factory(App\User::class)->create();
         $this->actingAs($user);
-            $response = $this->call('POST','books',['author_id'=>'1','description'=>'Description Test']);
+            $response = $this->call('POST','users',['author_id'=>'1','description'=>'Description Test']);
             $this->assertEquals(302, $response->status());
     }
 
@@ -64,7 +64,7 @@ class BookTest extends TestCase
      */
     public function it_does_not_create_book_when_guest()
     {
-        $this->visit('books/create')
+        $this->visit('users/create')
             ->seePageIs('login');
     }
 
@@ -75,9 +75,9 @@ class BookTest extends TestCase
     {
         $user = factory(App\User::class)->create();
         $this->actingAs($user)
-            ->visit('books')
+            ->visit('users')
             ->press('Delete')
-            ->seePageIs('/books');
+            ->seePageIs('/users');
     }
 
 }

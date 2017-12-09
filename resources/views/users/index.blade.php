@@ -16,7 +16,7 @@
         </div>
     @endif
 
-    <a href="{{url('/books/create')}}" class="btn btn-success">Create User</a>
+    <a href="{{url('/users/create')}}" class="btn btn-success">Create User</a>
     <hr>
     <table class="table table-striped table-bordered table-hover">
         <thead>
@@ -57,10 +57,10 @@
                 <td>{{ $user->email }}</td>
                 
                 
-                <td><a href="{{route('books.edit',$user->id)}}" class="btn btn-warning">Update</a></td>
+                <td><a href="{{route('users.edit',$user->id)}}" class="btn btn-warning">Update</a></td>
  
                 <td>
-                    {!! Form::open(['method' => 'DELETE', 'route'=>['books.destroy', $user->id]]) !!}
+                    {!! Form::open(['method' => 'DELETE', 'route'=>['users.destroy', $user->id]]) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                     {!! Form::close() !!}
                 </td>

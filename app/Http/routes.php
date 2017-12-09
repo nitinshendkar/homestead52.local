@@ -29,13 +29,13 @@ Route::post('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('home', ['as' => 'home', 'uses' => 'HomeController@index']);
 
-//books
-Route::get('books', ['as' => 'books.index', 'uses' => 'BookController@index']);
-Route::post('books', ['as' => 'books.store', 'uses' => 'BookController@store']);
-Route::get('books/create', ['as' => 'books.create', 'uses' => 'BookController@create']);
-Route::get('books/edit/{user}', ['as' => 'books.edit', 'uses' => 'BookController@edit']);
-Route::delete('books/{user}', ['as' => 'books.destroy', 'uses' => 'BookController@destroy']);
-Route::patch('books/{user}', ['as' => 'books.update', 'uses' => 'BookController@update']);
+//users
+Route::get('users', ['as' => 'users.index', 'uses' => 'UserController@index']);
+Route::post('users', ['as' => 'users.store', 'uses' => 'UserController@store']);
+Route::get('users/create', ['as' => 'users.create', 'uses' => 'UserController@create']);
+Route::get('users/edit/{user}', ['as' => 'users.edit', 'uses' => 'UserController@edit']);
+Route::delete('users/{user}', ['as' => 'users.destroy', 'uses' => 'UserController@destroy']);
+Route::patch('users/{user}', ['as' => 'users.update', 'uses' => 'UserController@update']);
 Route::get('search', ['as' => 'search.show', 'uses' => 'SearchUser@index']);
 Route::POST('search/find', ['as' => 'search.find', 'uses' => 'SearchUser@getUser']);
 
