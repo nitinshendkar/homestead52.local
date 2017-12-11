@@ -1,7 +1,7 @@
 
 @extends('layout.base')
 @section('content')
-    <h1>Create Book</h1>
+    <h1>Create Education Details</h1>
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -11,7 +11,7 @@
             </ul>
         </div>
     @endif
-    {!! Form::open(['route' => 'authors.store']) !!}
+    {!! Form::open(['route' => 'educations.store']) !!}
     <div class="form-group">
         {!! Form::label('Author Name', 'Author Name:') !!}
         {!! Form::text('name',null,['class'=>'form-control']) !!}

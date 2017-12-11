@@ -3,7 +3,7 @@
 
 
 @section('content')
-    <h1>Author's Store</h1>
+    <h1>Personals Details</h1>
 
     @if (count($errors) > 0)
         <div class="alert alert-danger">
@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <a href="{{url('/authors/create')}}" class="btn btn-success">Create Author</a>
+    <a href="{{url('/personal/create')}}" class="btn btn-success">Create Author</a>
     <hr>
     <table class="table table-striped table-bordered table-hover">
         <thead>
@@ -27,14 +27,13 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ($authors as $author)
+        @foreach ($personals as $personal)
             <tr>
-                <td>{{ $author->id }}</td>
-                <td>{{ $author->name }}</td>
-                <td><a href="{{route('authors.edit',$author->id)}}" class="btn btn-warning">Update</a></td>
+                <td>{{ $personal->id }}</td>
+                <td><a href="{{route('proffessional.edit',$proffessional->id)}}" class="btn btn-warning">Update</a></td>
 
                 <td>
-                    {!! Form::open(['method' => 'DELETE', 'route'=>['authors.destroy', $author->id]]) !!}
+                    {!! Form::open(['method' => 'DELETE', 'route'=>['proffessional.destroy', $author->id]]) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                     {!! Form::close() !!}
                 </td>
@@ -43,5 +42,5 @@
 
         </tbody>
     </table>
-    {{ $authors->appends(['sort' => 'updated_at'])->render() }}
+    {{ $personals->appends(['sort' => 'updated_at'])->render() }}
 @endsection

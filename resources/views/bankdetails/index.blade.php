@@ -3,7 +3,7 @@
 
 
 @section('content')
-    <h1>Author's Store</h1>
+    <h1>Bank Details</h1>
 
     @if (count($errors) > 0)
         <div class="alert alert-danger">
@@ -15,26 +15,32 @@
         </div>
     @endif
 
-    <a href="{{url('/authors/create')}}" class="btn btn-success">Create Author</a>
+    <a href="{{url('/banks/create')}}" class="btn btn-success">Create Bank Details</a>
     <hr>
     <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr class="bg-info">
             <th>Id</th>
-            <th>Author Name</th>
-            <th>update</th>
+            <th>Bank Name</th>
+            <th>Branch Name</th>
+            <th>IFSC Code</th>
+            <th>Account Number</th>
             <th>Delete</th>
         </tr>
         </thead>
         <tbody>
-        @foreach ($authors as $author)
+        @foreach ($banks as $bank)
             <tr>
-                <td>{{ $author->id }}</td>
-                <td>{{ $author->name }}</td>
-                <td><a href="{{route('authors.edit',$author->id)}}" class="btn btn-warning">Update</a></td>
+                <td>{{ $bank->id }}</td>
+                <td>{{ $bank->bank_name }}</td>
+                <td>{{ $bank->branch_name }}</td>
+                <td>{{ $bank->ifsc_code }}</td>
+                
+                
+                <td><a href="{{route('banks.edit',$bank->id)}}" class="btn btn-warning">Update</a></td>
 
                 <td>
-                    {!! Form::open(['method' => 'DELETE', 'route'=>['authors.destroy', $author->id]]) !!}
+                    {!! Form::open(['method' => 'DELETE', 'route'=>['banks.destroy', $bank->id]]) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                     {!! Form::close() !!}
                 </td>
@@ -43,5 +49,5 @@
 
         </tbody>
     </table>
-    {{ $authors->appends(['sort' => 'updated_at'])->render() }}
+    {{ $banks->appends(['sort' => 'updated_at'])->render() }}
 @endsection

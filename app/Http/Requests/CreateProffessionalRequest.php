@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class CreateBookRequest extends Request
+class CreateProffessionalRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,11 @@ class CreateBookRequest extends Request
     public function rules()
     { 
         return [
-            'first_name' => 'required|max:255|alpha_num',
-            'last_name' => 'required|max:255|alpha_num',
-            'home_address' => 'required|alpha_dash',
-            'office_address' => 'required|alpha_dash',
-            'phone' => 'numeric|required',
-            'email' => 'email|required',
-            'role' => 'numeric|required',
-            'dob' => 'date|required',
-            'doj' => 'date|required',
-            'profile_photo' => 'required|image',
-            'profile_signature' => 'required|image',
+            'designation' => 'required|max:255|alpha_num',
+            'organization' => 'required|max:255|alpha_num',
+            'current_working' => 'required|max:255|alpha_dash',
+            'joining_date' => 'required|date',
+            'reveliving_date' => 'required|date'
         ];
     }
 }

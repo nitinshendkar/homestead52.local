@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <a href="{{url('/authors/create')}}" class="btn btn-success">Create Author</a>
+    <a href="{{url('/proffessional/create')}}" class="btn btn-success">Create Author</a>
     <hr>
     <table class="table table-striped table-bordered table-hover">
         <thead>
@@ -27,14 +27,13 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ($authors as $author)
+        @foreach ($proffessionals as $proffessional)
             <tr>
-                <td>{{ $author->id }}</td>
-                <td>{{ $author->name }}</td>
-                <td><a href="{{route('authors.edit',$author->id)}}" class="btn btn-warning">Update</a></td>
+                <td>{{ $proffessional->id }}</td>
+                <td><a href="{{route('authors.edit',$proffessional->id)}}" class="btn btn-warning">Update</a></td>
 
                 <td>
-                    {!! Form::open(['method' => 'DELETE', 'route'=>['authors.destroy', $author->id]]) !!}
+                    {!! Form::open(['method' => 'DELETE', 'route'=>['proffessional.destroy', $proffessional->id]]) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                     {!! Form::close() !!}
                 </td>
@@ -43,5 +42,5 @@
 
         </tbody>
     </table>
-    {{ $authors->appends(['sort' => 'updated_at'])->render() }}
+    {{ $proffessionals->appends(['sort' => 'updated_at'])->render() }}
 @endsection

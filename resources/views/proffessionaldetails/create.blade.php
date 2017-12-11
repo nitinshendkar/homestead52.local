@@ -1,7 +1,7 @@
+
 @extends('layout.base')
 @section('content')
-    <h1>Update Book</h1>
-
+    <h1>Create Proffessional Details</h1>
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -11,13 +11,13 @@
             </ul>
         </div>
     @endif
-    {!! Form::model($author,['method' => 'PATCH','route'=>['authors.update',$author->id]]) !!}
+    {!! Form::open(['route' => 'proffessional.store']) !!}
     <div class="form-group">
         {!! Form::label('Author Name', 'Author Name:') !!}
         {!! Form::text('name',null,['class'=>'form-control']) !!}
     </div>
-   <div class="form-group">
-        {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
+    <div class="form-group">
+        {!! Form::submit('Save', ['class' => 'btn btn-primary form-control']) !!}
     </div>
     {!! Form::close() !!}
 @stop

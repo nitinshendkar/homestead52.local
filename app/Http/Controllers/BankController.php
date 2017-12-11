@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 
-use App\User;
+use App\Bank;
 use App\Http\Requests;
-use App\Http\Requests\CreateBookRequest;
+use App\Http\Requests\CreateBankRequest;
 use Illuminate\Support\Facades\DB;
 
 class BankController extends Controller
@@ -23,8 +23,8 @@ class BankController extends Controller
      */
     public function index()
     {
-        $users = \App\User::paginate(1);
-        return view('users.index', ['users' => $users]);
+        $banks = Bank::paginate(1);
+        return view('bankdetails.index', ['banks' => $banks]);
     }
 
     /**
@@ -34,55 +34,19 @@ class BankController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('bankdetails.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CreateBookRequest $request
+     * @param  CreateBankRequest $request
      * @return Response
      */
-    public function store(CreateBookRequest $request)
+    public function store(CreateBankRequest $request)
     {
         
-        $profilePhoto = file_get_contents($request->profile_photo->getPathname());
-        $profilePhotoType = $request->profile_photo->getClientMimeType();
-        $profilePhotoEncode = base64_encode($profilePhoto);
-        
-        $signaturePhoto = file_get_contents($request->profile_signature->getPathname());
-        $signaturePhotoType = $request->profile_signature->getClientMimeType();
-        $signaturePhotoEncode = base64_encode($signaturePhoto);
-        
-        User::create([
-            'name' => $request->first_name,
-            'lastname' => $request->last_name,
-            'office_address' => $request->office_address,
-            'home_address' => $request->home_address,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'role' => $request->role,
-            'emp_id' => $request->emp_id,
-            'dob' => $request->dob,
-            'doj' => $request->doj,
-            'photo' => $profilePhotoEncode,
-            'photo_type' => $profilePhotoType,
-            'signature' => $signaturePhotoEncode,
-            'signature_type' => $signaturePhotoType,
-            'password' => bcrypt($request->password),
-        ]);
-        return redirect()->route('users.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  Book $book
-     * @return Response
-     */
-    public function show(Book $book)
-    {
-        return view('users.show', compact('book'));
+        return redirect()->route('bankdetails.index');
     }
 
     /**
@@ -91,9 +55,9 @@ class BankController extends Controller
      * @param  Book $book
      * @return Response
      */
-    public function edit(User $user)
+    public function edit(Bank $bank)
     {
-      return view('users.edit', compact('user'));
+      return view('bankdetails.edit', compact('bank'));
     }
 
     /**
@@ -103,35 +67,12 @@ class BankController extends Controller
      * @return Response
      *
      */
-    public function update($bookId, CreateBookRequest $request)
+    public function update($bankId, CreateBankRequest $request)
     {
       
-        $user = User::find($bookId);
-        $profilePhoto = file_get_contents($request->profile_photo->getPathname());
-        $profilePhotoType = $request->profile_photo->getClientMimeType();
-        $profilePhotoEncode = base64_encode($profilePhoto);
-        
-        $signaturePhoto = file_get_contents($request->profile_signature->getPathname());
-        $signaturePhotoType = $request->profile_signature->getClientMimeType();
-        $signaturePhotoEncode = base64_encode($signaturePhoto);
-       
-            $user->name = $request->first_name;
-            $user->lastname = $request->last_name;
-            $user->office_address = $request->office_address;
-            $user->home_address = $request->home_address;
-            $user->phone = $request->phone;
-            $user->email = $request->email;
-            $user->role = $request->role;
-            $user->emp_id = $request->emp_id;
-            $user->dob = $request->dob;
-            $user->doj = $request->doj;
-            $user->photo = $profilePhotoEncode;
-            $user->photo_type = $profilePhotoType;
-            $user->signature = $signaturePhotoEncode;
-            $user->signature_type = $signaturePhotoType;
-            
-        $user->save();
-        return redirect()->route('users.index');
+        $bank = Bank::find($bankId);
+        $bank->save();
+        return redirect()->route('bankdetails.index');
     }
 
     /**
@@ -142,7 +83,7 @@ class BankController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return redirect()->route('users.index');
+        Bank::find($id)->delete();
+        return redirect()->route('bankdetails.index');
     }
 }

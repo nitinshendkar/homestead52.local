@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-use App\User;
+use App\Personal;
 use App\Http\Requests;
 use App\Http\Requests\CreatePersonalRequest;
 use Illuminate\Support\Facades\DB;
@@ -23,8 +23,8 @@ class PersonalController extends Controller
      */
     public function index()
     {
-        $users = \App\User::paginate(1);
-        return view('users.index', ['users' => $users]);
+        $personals = \App\Personal::paginate(1);
+        return view('personaldetails.index', ['personals' => $personals]);
     }
 
     /**
@@ -34,66 +34,29 @@ class PersonalController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('personaldetails.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CreateBookRequest $request
+     * @param  CreatePersonalRequest $request
      * @return Response
      */
-    public function store(CreateBookRequest $request)
+    public function store(CreatePersonalRequest $request)
     {
-        
-        $profilePhoto = file_get_contents($request->profile_photo->getPathname());
-        $profilePhotoType = $request->profile_photo->getClientMimeType();
-        $profilePhotoEncode = base64_encode($profilePhoto);
-        
-        $signaturePhoto = file_get_contents($request->profile_signature->getPathname());
-        $signaturePhotoType = $request->profile_signature->getClientMimeType();
-        $signaturePhotoEncode = base64_encode($signaturePhoto);
-        
-        User::create([
-            'name' => $request->first_name,
-            'lastname' => $request->last_name,
-            'office_address' => $request->office_address,
-            'home_address' => $request->home_address,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'role' => $request->role,
-            'emp_id' => $request->emp_id,
-            'dob' => $request->dob,
-            'doj' => $request->doj,
-            'photo' => $profilePhotoEncode,
-            'photo_type' => $profilePhotoType,
-            'signature' => $signaturePhotoEncode,
-            'signature_type' => $signaturePhotoType,
-            'password' => bcrypt($request->password),
-        ]);
-        return redirect()->route('users.index');
+        return redirect()->route('personaldetails.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  Book $book
-     * @return Response
-     */
-    public function show(Book $book)
-    {
-        return view('users.show', compact('book'));
-    }
-
-    /**
+   /**
      * Show the form for editing the specified resource.
      *
      * @param  Book $book
      * @return Response
      */
-    public function edit(User $user)
+    public function edit(Personal $personal)
     {
-      return view('users.edit', compact('user'));
+      return view('personaldetails.edit', compact('personal'));
     }
 
     /**
@@ -103,35 +66,12 @@ class PersonalController extends Controller
      * @return Response
      *
      */
-    public function update($bookId, CreateBookRequest $request)
+    public function update($personalId, CreatePersonalRequest $request)
     {
       
-        $user = User::find($bookId);
-        $profilePhoto = file_get_contents($request->profile_photo->getPathname());
-        $profilePhotoType = $request->profile_photo->getClientMimeType();
-        $profilePhotoEncode = base64_encode($profilePhoto);
-        
-        $signaturePhoto = file_get_contents($request->profile_signature->getPathname());
-        $signaturePhotoType = $request->profile_signature->getClientMimeType();
-        $signaturePhotoEncode = base64_encode($signaturePhoto);
-       
-            $user->name = $request->first_name;
-            $user->lastname = $request->last_name;
-            $user->office_address = $request->office_address;
-            $user->home_address = $request->home_address;
-            $user->phone = $request->phone;
-            $user->email = $request->email;
-            $user->role = $request->role;
-            $user->emp_id = $request->emp_id;
-            $user->dob = $request->dob;
-            $user->doj = $request->doj;
-            $user->photo = $profilePhotoEncode;
-            $user->photo_type = $profilePhotoType;
-            $user->signature = $signaturePhotoEncode;
-            $user->signature_type = $signaturePhotoType;
-            
-        $user->save();
-        return redirect()->route('users.index');
+        $personal = Personal::find($personalId);
+        $personal->save();
+        return redirect()->route('personaldetails.index');
     }
 
     /**
@@ -142,7 +82,7 @@ class PersonalController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return redirect()->route('users.index');
+        Personal::find($id)->delete();
+        return redirect()->route('personaldetails.index');
     }
 }

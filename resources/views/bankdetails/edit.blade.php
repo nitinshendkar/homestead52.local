@@ -11,10 +11,22 @@
             </ul>
         </div>
     @endif
-    {!! Form::model($author,['method' => 'PATCH','route'=>['authors.update',$author->id]]) !!}
+    {!! Form::model($bank,['method' => 'PATCH','route'=>['banks.update',$bank->id]]) !!}
     <div class="form-group">
-        {!! Form::label('Author Name', 'Author Name:') !!}
-        {!! Form::text('name',null,['class'=>'form-control']) !!}
+        <span class="input-group-addon"> Bank Name</span>
+        <input class="form-control" type="text" name="bank_name" value="{{ $bank->bank_name }}">
+    </div>
+    <div class="form-group">
+        <span class="input-group-addon"> Bank Name</span>
+        <input class="form-control" type="text" name="branch_name" value="{{ $bank->branch_name }}">
+    </div>
+    <div class="form-group">
+        <span class="input-group-addon"> IFSC Code</span>
+        <input class="form-control" type="text" name="ifsc_code" value="{{ $bank->ifsc_code }}">
+    </div>
+    <div class="form-group">
+        <span class="input-group-addon">Account Number</span>
+        <input class="form-control" type="text" name="account_no" value="{{ $bank->account_no }}">
     </div>
    <div class="form-group">
         {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
