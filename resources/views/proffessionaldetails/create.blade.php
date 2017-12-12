@@ -11,11 +11,28 @@
             </ul>
         </div>
     @endif
-    {!! Form::open(['route' => 'proffessional.store']) !!}
+    {!! Form::open(['route' => 'proffessional.store', 'files' => true]) !!}
     <div class="form-group">
-        {!! Form::label('Author Name', 'Author Name:') !!}
-        {!! Form::text('name',null,['class'=>'form-control']) !!}
+        {!! Form::label('Designation', 'Designation:') !!}
+        {!! Form::text('designation',null,['class'=>'form-control']) !!}
     </div>
+    <div class="form-group">
+        {!! Form::label('Organization', 'Organization:') !!}
+        {!! Form::text('organization',null,['class'=>'form-control']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('Current Working', 'Current Working:') !!}
+        {!! Form::text('current_working',null,['class'=>'form-control']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('Joining Date', 'Joining Date:') !!}
+        {!! Form::file('joining_date',null,['class'=>'form-control']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('Reveliving Date', 'Reveliving Date:') !!}
+        {!! Form::text('reveliving_date',null,['class'=>'form-control']) !!}
+    </div>
+    
     <div class="form-group">
         {!! Form::submit('Save', ['class' => 'btn btn-primary form-control']) !!}
     </div>

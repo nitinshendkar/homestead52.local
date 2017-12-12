@@ -24,7 +24,7 @@ class BankController extends Controller
     public function index()
     {
         $banks = Bank::paginate(1);
-        return view('bankdetails.index', ['banks' => $banks]);
+        return view('banks.index', ['banks' => $banks]);
     }
 
     /**
@@ -34,7 +34,7 @@ class BankController extends Controller
      */
     public function create()
     {
-        return view('bankdetails.create');
+        return view('banks.create');
     }
 
     /**
@@ -45,8 +45,13 @@ class BankController extends Controller
      */
     public function store(CreateBankRequest $request)
     {
-        
-        return redirect()->route('bankdetails.index');
+        Bank::create([
+            'bank_name' =>$request->bank_name,
+            'branch_name' =>$request->branch_name,
+            'ifsc_code' =>$request->ifsc_code,
+            'account_no' =>$request->account_no ,
+        ]);
+        return redirect()->route('banks.index');
     }
 
     /**
@@ -57,7 +62,7 @@ class BankController extends Controller
      */
     public function edit(Bank $bank)
     {
-      return view('bankdetails.edit', compact('bank'));
+      return view('banks.edit', compact('bank'));
     }
 
     /**
@@ -67,12 +72,15 @@ class BankController extends Controller
      * @return Response
      *
      */
-    public function update($bankId, CreateBankRequest $request)
+    public function update(Bank $bank, CreateBankRequest $request)
     {
       
-        $bank = Bank::find($bankId);
+        $bank->bank_name = $request->bank_name;
+        $bank->branch_name = $request->branch_name;
+        $bank->ifsc_code = $request->ifsc_code;
+        $bank->account_no = $request->account_no;
         $bank->save();
-        return redirect()->route('bankdetails.index');
+        return redirect()->route('banks.index');
     }
 
     /**
@@ -84,6 +92,6 @@ class BankController extends Controller
     public function destroy($id)
     {
         Bank::find($id)->delete();
-        return redirect()->route('bankdetails.index');
+        return redirect()->route('banks.index');
     }
 }

@@ -26,8 +26,8 @@ class CreatePersonalRequest extends Request
         return [
             'dob' => 'date|required',
             'doj' => 'date|required',
-            'profile_photo' => 'required|image',
-            'profile_signature' => 'required|image',
+            'photo' => 'required|image',
+            'signature' => 'required|image',
         ];
     }
 }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Education;
 use App\Http\Requests;
-use App\Http\Requests\CreateEducationalRequest;
+use App\Http\Requests\CreateEducationRequest;
 use Illuminate\Support\Facades\DB;
 
 class EducationalController extends Controller
@@ -24,7 +24,7 @@ class EducationalController extends Controller
     public function index()
     {
         $educations = \App\Education::paginate(1);
-        return view('educationdetails.index', ['educations' => $educations]);
+        return view('educations.index', ['educations' => $educations]);
     }
 
     /**
@@ -34,7 +34,7 @@ class EducationalController extends Controller
      */
     public function create()
     {
-        return view('educationdetails.create');
+        return view('educations.create');
     }
 
     /**
@@ -43,9 +43,18 @@ class EducationalController extends Controller
      * @param  CreateBookRequest $request
      * @return Response
      */
-    public function store(CreateEducationalRequest $request)
+    public function store(CreateEducationRequest $request)
     {
-        return redirect()->route('educationdetails.index');
+        dd($request);
+        Personal::create([
+            'dob' => $request->dob,
+            'doj' => $request->doj,
+            'photo' => $profilePhotoEncode,
+            'photo_type' => $profilePhotoType,
+            'signature' => $signaturePhotoEncode,
+            'signature_type' => $signaturePhotoType,
+        ]);
+        return redirect()->route('educations.index');
     }
 
     /**
@@ -56,7 +65,7 @@ class EducationalController extends Controller
      */
     public function edit(Education $education)
     {
-      return view('educationdetails.edit', compact('education'));
+      return view('educations.edit', compact('education'));
     }
 
     /**
@@ -71,7 +80,7 @@ class EducationalController extends Controller
       
         $education = Education::find($prsonalDetailId);
         $education->save();
-        return redirect()->route('educationdetails.index');
+        return redirect()->route('educations.index');
     }
 
     /**
@@ -83,6 +92,6 @@ class EducationalController extends Controller
     public function destroy($id)
     {
         Education::find($id)->delete();
-        return redirect()->route('educationdetails.index');
+        return redirect()->route('educations.index');
     }
 }

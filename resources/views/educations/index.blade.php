@@ -21,7 +21,11 @@
         <thead>
         <tr class="bg-info">
             <th>Id</th>
-            <th>Educations Name</th>
+            <th>Degree</th>
+            <th>Board</th>
+            <th>Percentage</th>
+            <th>Specialization</th>
+            <th>Year Of Passing</th>
             <th>update</th>
             <th>Delete</th>
         </tr>
@@ -30,10 +34,15 @@
         @foreach ($educations as $education)
             <tr>
                 <td>{{ $education->id }}</td>
-                <td><a href="{{route('educations.edit',$author->id)}}" class="btn btn-warning">Update</a></td>
+                <td>{{ $education->degree }}</td>
+                <td>{{ $education->board }}</td>
+                <td>{{ $education->percentage}}</td>
+                <td>{{ $education->specialization }}</td>
+                <td>{{ $education->year_of_passing }}</td>
+                <td><a href="{{route('educations.edit',$education->id)}}" class="btn btn-warning">Update</a></td>
 
                 <td>
-                    {!! Form::open(['method' => 'DELETE', 'route'=>['authors.destroy', $author->id]]) !!}
+                    {!! Form::open(['method' => 'DELETE', 'route'=>['educations.destroy', $education->id]]) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                     {!! Form::close() !!}
                 </td>

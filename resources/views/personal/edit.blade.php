@@ -13,8 +13,20 @@
     @endif
     {!! Form::model($personal,['method' => 'PATCH','route'=>['personal.update',$personal->id]]) !!}
     <div class="form-group">
-        {!! Form::label('Author Name', 'Author Name:') !!}
-        {!! Form::text('name',null,['class'=>'form-control']) !!}
+        {!! Form::label('Date Of Birth', 'Date Of Birth:') !!}
+        {!! Form::date('dob',null,['class'=>'form-control']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('Date Of Joining', 'Date Of Joining:') !!}
+        {!! Form::date('doj',null ,['class'=>'form-control']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('photo', 'photo:') !!}
+        {!! Form::file('photo') !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('Signature', 'Signature:') !!}
+        {!! Form::file('signature') !!}
     </div>
    <div class="form-group">
         {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}

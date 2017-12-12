@@ -15,13 +15,16 @@
         </div>
     @endif
 
-    <a href="{{url('/personal/create')}}" class="btn btn-success">Create Author</a>
+    <a href="{{url('/personal/create')}}" class="btn btn-success">Create Personal Details</a>
     <hr>
     <table class="table table-striped table-bordered table-hover">
         <thead>
         <tr class="bg-info">
             <th>Id</th>
-            <th>Author Name</th>
+            <th>Date Of Birth</th>
+            <th>Date Of Joining</th>
+            <th>Signature</th>
+            <th>Photo</th>
             <th>update</th>
             <th>Delete</th>
         </tr>
@@ -30,10 +33,14 @@
         @foreach ($personals as $personal)
             <tr>
                 <td>{{ $personal->id }}</td>
-                <td><a href="{{route('proffessional.edit',$proffessional->id)}}" class="btn btn-warning">Update</a></td>
+                <td>{{ $personal->dob}}</td>
+                <td>{{ $personal->doj }}</td>
+                <td><?php echo '<img width=100 height=100 src="data:'.$personal->photo_type.';base64,' .$personal->photo .'"/>'; ?></td>
+                <td><?php echo '<img width=100 height=100 src="data:'.$personal->signature_type.';base64,'. $personal->signature .'"/>'; ?></td>
+                <td><a href="{{route('personal.edit',$personal->id)}}" class="btn btn-warning">Update</a></td>
 
                 <td>
-                    {!! Form::open(['method' => 'DELETE', 'route'=>['proffessional.destroy', $author->id]]) !!}
+                    {!! Form::open(['method' => 'DELETE', 'route'=>['personal.destroy', $personal->id]]) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                     {!! Form::close() !!}
                 </td>

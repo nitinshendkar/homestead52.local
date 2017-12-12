@@ -21,7 +21,11 @@
         <thead>
         <tr class="bg-info">
             <th>Id</th>
-            <th>Author Name</th>
+            <th>Designation</th>
+            <th>Organization</th>
+            <th>Current Working</th>
+            <th>Joining Date</th>
+            <th>Reveliving Date</th>
             <th>update</th>
             <th>Delete</th>
         </tr>
@@ -30,6 +34,11 @@
         @foreach ($proffessionals as $proffessional)
             <tr>
                 <td>{{ $proffessional->id }}</td>
+                 <td>{{ $proffessional->designation }}</td>
+                  <td>{{ $proffessional->organization }}</td>
+                   <td>{{ $proffessional->current_working }}</td>
+                    <td>{{ $proffessional->joining_date }}</td>
+                     <td>{{ $proffessional->reveliving_date }}</td>
                 <td><a href="{{route('authors.edit',$proffessional->id)}}" class="btn btn-warning">Update</a></td>
 
                 <td>

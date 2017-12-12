@@ -61,9 +61,9 @@ Route::patch('proffessional/{user}', ['as' => 'proffessional.update', 'uses' => 
 Route::get('banks', ['as' => 'banks.index', 'uses' => 'BankController@index']);
 Route::post('banks', ['as' => 'banks.store', 'uses' => 'BankController@store']);
 Route::get('banks/create', ['as' => 'banks.create', 'uses' => 'BankController@create']);
-Route::get('banks/edit/{user}', ['as' => 'banks.edit', 'uses' => 'BankController@edit']);
-Route::delete('banks/{user}', ['as' => 'banks.destroy', 'uses' => 'BankController@destroy']);
-Route::patch('banks/{user}', ['as' => 'banks.update', 'uses' => 'BankController@update']);
+Route::get('banks/edit/{bank}', ['as' => 'banks.edit', 'uses' => 'BankController@edit']);
+Route::delete('banks/{bank}', ['as' => 'banks.destroy', 'uses' => 'BankController@destroy']);
+Route::patch('banks/{bank}', ['as' => 'banks.update', 'uses' => 'BankController@update']);
 
 Route::get('search', ['as' => 'search.show', 'uses' => 'SearchUser@index']);
 Route::POST('search/find', ['as' => 'search.find', 'uses' => 'SearchUser@getUser']);

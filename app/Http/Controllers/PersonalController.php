@@ -24,7 +24,7 @@ class PersonalController extends Controller
     public function index()
     {
         $personals = \App\Personal::paginate(1);
-        return view('personaldetails.index', ['personals' => $personals]);
+        return view('personal.index', ['personals' => $personals]);
     }
 
     /**
@@ -34,7 +34,7 @@ class PersonalController extends Controller
      */
     public function create()
     {
-        return view('personaldetails.create');
+        return view('personal.create');
     }
 
     /**
@@ -45,7 +45,34 @@ class PersonalController extends Controller
      */
     public function store(CreatePersonalRequest $request)
     {
-        return redirect()->route('personaldetails.index');
+        $profilePhotoType = null;
+        $signaturePhotoType= null;
+        $profilePhotoEncode = null;
+        $signaturePhotoEncode = null;
+        
+        if(!empty($request->photo)){
+            $profilePhoto = file_get_contents($request->photo->getPathname());
+            $profilePhotoType = $request->photo->getClientMimeType();
+            $profilePhotoEncode = base64_encode($profilePhoto);
+        }
+        if(!empty($request->signature)){
+            $signaturePhoto = file_get_contents($request->signature->getPathname());
+            $signaturePhotoType = $request->signature->getClientMimeType();
+            $signaturePhotoEncode = base64_encode($signaturePhoto);
+        }
+        
+        
+        
+        
+        Personal::create([
+            'dob' => $request->dob,
+            'doj' => $request->doj,
+            'photo' => $profilePhotoEncode,
+            'photo_type' => $profilePhotoType,
+            'signature' => $signaturePhotoEncode,
+            'signature_type' => $signaturePhotoType,
+        ]);
+        return redirect()->route('personal.index');
     }
 
    /**
@@ -56,7 +83,7 @@ class PersonalController extends Controller
      */
     public function edit(Personal $personal)
     {
-      return view('personaldetails.edit', compact('personal'));
+      return view('personal.edit', compact('personal'));
     }
 
     /**
@@ -70,8 +97,9 @@ class PersonalController extends Controller
     {
       
         $personal = Personal::find($personalId);
+        dd($personal);
         $personal->save();
-        return redirect()->route('personaldetails.index');
+        return redirect()->route('personal.index');
     }
 
     /**
@@ -83,6 +111,6 @@ class PersonalController extends Controller
     public function destroy($id)
     {
         Personal::find($id)->delete();
-        return redirect()->route('personaldetails.index');
+        return redirect()->route('personal.index');
     }
 }
