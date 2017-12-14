@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class DistrictMaster extends Migration
+class CreateAddressTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,14 @@ class DistrictMaster extends Migration
      */
     public function up()
     {
-        Schema::create('district_master', function (Blueprint $table) {
+        Schema::create('user_address', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('code',3);
+            $table->integer('user_id');
             $table->integer('state_id');
-            $table->string('name',20);
+            $table->integer('district_id');
+            $table->integer('taluka_id');
+            $table->integer('address_type');
+            $table->string('village',50);
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('created_at');
         });
@@ -29,6 +32,6 @@ class DistrictMaster extends Migration
      */
     public function down()
     {
-        Schema::drop('district_master');
+        Schema::drop('approval_count_master');
     }
 }

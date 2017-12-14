@@ -39,7 +39,7 @@
                    <td>{{ $proffessional->current_working }}</td>
                     <td>{{ $proffessional->joining_date }}</td>
                      <td>{{ $proffessional->reveliving_date }}</td>
-                <td><a href="{{route('authors.edit',$proffessional->id)}}" class="btn btn-warning">Update</a></td>
+                <td><a href="{{route('proffessional.edit',$proffessional->id)}}" class="btn btn-warning">Update</a></td>
 
                 <td>
                     {!! Form::open(['method' => 'DELETE', 'route'=>['proffessional.destroy', $proffessional->id]]) !!}

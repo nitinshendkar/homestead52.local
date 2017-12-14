@@ -12,10 +12,11 @@ class ApprovalCountMaster extends Migration
      */
     public function up()
     {
-        Schema::create('approval_count_master', function (Blueprint $table) {
+        Schema::create('user_module_approval', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
+            $table->string('module',20);
             $table->string('approve_type',20);
-            $table->integer('default_count');
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('created_at');
         });
@@ -28,6 +29,6 @@ class ApprovalCountMaster extends Migration
      */
     public function down()
     {
-        Schema::drop('approval_count_master');
+        Schema::drop('user_module_approval');
     }
 }

@@ -45,14 +45,12 @@ class EducationalController extends Controller
      */
     public function store(CreateEducationRequest $request)
     {
-        dd($request);
-        Personal::create([
-            'dob' => $request->dob,
-            'doj' => $request->doj,
-            'photo' => $profilePhotoEncode,
-            'photo_type' => $profilePhotoType,
-            'signature' => $signaturePhotoEncode,
-            'signature_type' => $signaturePhotoType,
+        Education::create([
+            'degree' => $request->degree,
+            'board' => $request->board,
+            'percentage' => $request->percentage,
+            'specialization' => $request->percentage,
+            'year_of_passing' => $request->percentage,
         ]);
         return redirect()->route('educations.index');
     }
@@ -65,7 +63,7 @@ class EducationalController extends Controller
      */
     public function edit(Education $education)
     {
-      return view('educations.edit', compact('education'));
+        return view('educations.edit', compact('education'));
     }
 
     /**
@@ -75,10 +73,15 @@ class EducationalController extends Controller
      * @return Response
      *
      */
-    public function update($prsonalDetailId, CreateEducationalRequest $request)
+    public function update($prsonalDetailId, CreateEducationRequest $request)
     {
       
         $education = Education::find($prsonalDetailId);
+        $education->degree = $request->degree;
+        $education->board = $request->board;
+        $education->percentage = $request->percentage;
+        $education->specialization = $request->specialization;
+        $education->year_of_passing = $request->year_of_passing;
         $education->save();
         return redirect()->route('educations.index');
     }

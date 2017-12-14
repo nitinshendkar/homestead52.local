@@ -40,23 +40,30 @@ Route::patch('users/{user}', ['as' => 'users.update', 'uses' => 'UserController@
 Route::get('educations', ['as' => 'educations.index', 'uses' => 'EducationalController@index']);
 Route::post('educations', ['as' => 'educations.store', 'uses' => 'EducationalController@store']);
 Route::get('educations/create', ['as' => 'educations.create', 'uses' => 'EducationalController@create']);
-Route::get('educations/edit/{user}', ['as' => 'educations.edit', 'uses' => 'EducationalController@edit']);
-Route::delete('educations/{user}', ['as' => 'educations.destroy', 'uses' => 'EducationalController@destroy']);
-Route::patch('educations/{user}', ['as' => 'educations.update', 'uses' => 'EducationalController@update']);
+Route::get('educations/edit/{education}', ['as' => 'educations.edit', 'uses' => 'EducationalController@edit']);
+Route::delete('educations/{education}', ['as' => 'educations.destroy', 'uses' => 'EducationalController@destroy']);
+Route::patch('educations/{education}', ['as' => 'educations.update', 'uses' => 'EducationalController@update']);
+
+Route::get('address', ['as' => 'address.index', 'uses' => 'AddressController@index']);
+Route::post('address', ['as' => 'address.store', 'uses' => 'AddressController@store']);
+Route::get('address/create', ['as' => 'address.create', 'uses' => 'AddressController@create']);
+Route::get('address/edit/{address}', ['as' => 'address.edit', 'uses' => 'AddressController@edit']);
+Route::delete('address/{address}', ['as' => 'address.destroy', 'uses' => 'AddressController@destroy']);
+Route::patch('address/{address}', ['as' => 'address.update', 'uses' => 'AddressController@update']);
 
 Route::get('personal', ['as' => 'personal.index', 'uses' => 'PersonalController@index']);
 Route::post('personal', ['as' => 'personal.store', 'uses' => 'PersonalController@store']);
 Route::get('personal/create', ['as' => 'personal.create', 'uses' => 'PersonalController@create']);
-Route::get('personal/edit/{user}', ['as' => 'personal.edit', 'uses' => 'PersonalController@edit']);
-Route::delete('personal/{user}', ['as' => 'personal.destroy', 'uses' => 'PersonalController@destroy']);
-Route::patch('personal/{user}', ['as' => 'personal.update', 'uses' => 'PersonalController@update']);
+Route::get('personal/edit/{personal}', ['as' => 'personal.edit', 'uses' => 'PersonalController@edit']);
+Route::delete('personal/{personal}', ['as' => 'personal.destroy', 'uses' => 'PersonalController@destroy']);
+Route::patch('personal/{personal}', ['as' => 'personal.update', 'uses' => 'PersonalController@update']);
 
 Route::get('proffessional', ['as' => 'proffessional.index', 'uses' => 'ProffessionalController@index']);
 Route::post('proffessional', ['as' => 'proffessional.store', 'uses' => 'ProffessionalController@store']);
 Route::get('proffessional/create', ['as' => 'proffessional.create', 'uses' => 'ProffessionalController@create']);
-Route::get('proffessional/edit/{user}', ['as' => 'proffessional.edit', 'uses' => 'ProffessionalController@edit']);
-Route::delete('proffessional/{user}', ['as' => 'proffessional.destroy', 'uses' => 'ProffessionalController@destroy']);
-Route::patch('proffessional/{user}', ['as' => 'proffessional.update', 'uses' => 'ProffessionalController@update']);
+Route::get('proffessional/edit/{proffessional}', ['as' => 'proffessional.edit', 'uses' => 'ProffessionalController@edit']);
+Route::delete('proffessional/{proffessional}', ['as' => 'proffessional.destroy', 'uses' => 'ProffessionalController@destroy']);
+Route::patch('proffessional/{proffessional}', ['as' => 'proffessional.update', 'uses' => 'ProffessionalController@update']);
 
 Route::get('banks', ['as' => 'banks.index', 'uses' => 'BankController@index']);
 Route::post('banks', ['as' => 'banks.store', 'uses' => 'BankController@store']);

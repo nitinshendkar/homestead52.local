@@ -14,7 +14,7 @@ class TalukaMaster extends Migration
     {
         Schema::create('taluka_master', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('code',1);
+            $table->char('code',3);
             $table->integer('state_id');
             $table->integer('district_id');
             $table->string('name',20);

@@ -11,7 +11,7 @@
             </ul>
         </div>
     @endif
-    {!! Form::model($author,['method' => 'PATCH','route'=>['education.update',$author->id]]) !!}
+    {!! Form::model($education,['method' => 'PATCH','route'=>['educations.update',$education->id]]) !!}
     <div class="form-group">
         {!! Form::label('Degree Name', 'Degree Name:') !!}
         {!! Form::text('degree',null,['class'=>'form-control']) !!}

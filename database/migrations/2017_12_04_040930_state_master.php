@@ -14,7 +14,7 @@ class StateMaster extends Migration
     {
         Schema::create('state_master', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('code',1);
+            $table->char('code',3);
             $table->string('name',20);
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('created_at');

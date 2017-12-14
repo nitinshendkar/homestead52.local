@@ -26,11 +26,11 @@
     </div>
     <div class="form-group">
         {!! Form::label('Joining Date', 'Joining Date:') !!}
-        {!! Form::file('joining_date',null,['class'=>'form-control']) !!}
+        {!! Form::date('joining_date',null,['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('Reveliving Date', 'Reveliving Date:') !!}
-        {!! Form::text('reveliving_date',null,['class'=>'form-control']) !!}
+        {!! Form::date('reveliving_date',null,['class'=>'form-control']) !!}
     </div>
    <div class="form-group">
         {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}

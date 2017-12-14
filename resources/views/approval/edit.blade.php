@@ -1,7 +1,7 @@
-
 @extends('layout.base')
 @section('content')
-    <h1>Create Proffessional Details</h1>
+    <h1>Update Book</h1>
+
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -11,7 +11,7 @@
             </ul>
         </div>
     @endif
-    {!! Form::open(['route' => 'proffessional.store', 'files' => true]) !!}
+    {!! Form::model($proffessional,['method' => 'PATCH','route'=>['proffessional.update',$proffessional->id]]) !!}
     <div class="form-group">
         {!! Form::label('Designation', 'Designation:') !!}
         {!! Form::text('designation',null,['class'=>'form-control']) !!}
@@ -26,15 +26,14 @@
     </div>
     <div class="form-group">
         {!! Form::label('Joining Date', 'Joining Date:') !!}
-        {!! Form::file('joining_date',null,['class'=>'form-control']) !!}
+        {!! Form::date('joining_date',null,['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('Reveliving Date', 'Reveliving Date:') !!}
-        {!! Form::text('reveliving_date',null,['class'=>'form-control']) !!}
+        {!! Form::date('reveliving_date',null,['class'=>'form-control']) !!}
     </div>
-    
-    <div class="form-group">
-        {!! Form::submit('Save', ['class' => 'btn btn-primary form-control']) !!}
+   <div class="form-group">
+        {!! Form::submit('Update', ['class' => 'btn btn-primary']) !!}
     </div>
     {!! Form::close() !!}
 @stop

@@ -24,7 +24,7 @@ class ProffessionalController extends Controller
     public function index()
     {
         $proffessionals = Proffessional::paginate(1);
-        return view('proffessionaldetails.index', ['proffessionals' => $proffessionals]);
+        return view('proffessional.index', ['proffessionals' => $proffessionals]);
     }
 
     /**
@@ -34,7 +34,7 @@ class ProffessionalController extends Controller
      */
     public function create()
     {
-        return view('proffessionaldetails.create');
+        return view('proffessional.create');
     }
 
     /**
@@ -45,12 +45,20 @@ class ProffessionalController extends Controller
      */
     public function store(CreateProffessionalRequest $request)
     {
-        return redirect()->route('proffessionaldetails.index');
+        
+        Proffessional::create([
+            'designation' => $request->designation,
+            'organization' => $request->organization,
+            'current_working' => $request->current_working,
+            'joining_date' => $request->joining_date,
+            'year_of_passing' => $request->reveliving_date,
+        ]);
+        return redirect()->route('proffessional.index');
     }
 
     public function show(Proffessional $proffessional)
     {
-        return view('proffessionaldetails.show', compact('proffessional'));
+        return view('proffessional.show', compact('proffessional'));
     }
 
     /**
@@ -61,19 +69,26 @@ class ProffessionalController extends Controller
      */
     public function edit(Proffessional $proffessional)
     {
-      return view('proffessionaldetails.edit', compact('proffessional'));
+      return view('proffessional.edit', compact('proffessional'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  int $id
+     * $param Proffessional $proffessional
      * @return Response
      *
      */
-    public function update($proffessionalId, CreateProffessionalRequest $request)
+    public function update(Proffessional $proffessional, CreateProffessionalRequest $request)
     {
-        return redirect()->route('proffessionaldetails.index');
+        $proffessional->designation = $request->designation;
+        $proffessional->organization = $request->organization;
+        $proffessional->current_working = $request->current_working;
+        $proffessional->joining_date = $request->joining_date;
+        $proffessional->reveliving_date = $request->reveliving_date;
+        $proffessional->save();
+        return redirect()->route('proffessional.index');
     }
 
     /**
@@ -85,6 +100,6 @@ class ProffessionalController extends Controller
     public function destroy($id)
     {
         Proffessional::find($id)->delete();
-        return redirect()->route('proffessionaldetails.index');
+        return redirect()->route('proffessional.index');
     }
 }

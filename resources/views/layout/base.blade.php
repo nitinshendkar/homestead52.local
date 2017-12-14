@@ -21,7 +21,7 @@
 						<li><a href="/educations">&nbsp; <br>Education</a></li>
 						<li><a href="/personal">&nbsp; <br>Personal</a></li>
 						<li><a href="/banks">&nbsp; <br>Bank</a></li>
-						<li><a href="/proffessional">&nbsp; <br>professional</a></li>
+						<li><a href="/proffessional">&nbsp; <br>professional</a></li><li><a href="{{ route('address.index')}}">&nbsp;<br>Address</a></li>
 						<li><a href="{{ route('search.show')}}">Finder</a></li>
                         <li><a href="/paywithpaypal">Make <br>Payment</a></li>
                     </ul>
