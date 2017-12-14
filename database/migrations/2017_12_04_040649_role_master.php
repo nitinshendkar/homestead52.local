@@ -16,9 +16,7 @@ class RoleMaster extends Migration
             $table->increments('id');
             $table->string('role_type',50);
             $table->string('role_name',50);
-            $table->string('module_name',50);
             $table->binary('permission');
-            $table->char('code' , 5);
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('created_at');
 

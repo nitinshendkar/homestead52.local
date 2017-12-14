@@ -14,6 +14,7 @@ class PersonalDetails extends Migration
     {
         Schema::create('personal_details', function (Blueprint $table) {
             $table->increments('id');
+            $table->ineger('user_id');
             $table->date('dob');
             $table->date('doj');
             $table->binary('photo');

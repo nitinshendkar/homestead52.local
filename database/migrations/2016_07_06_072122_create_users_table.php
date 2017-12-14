@@ -17,15 +17,10 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name',60);
             $table->string('lastname',60)->nullable();
-            $table->longtext('home_address')->nullable();
-            $table->longtext('office_address')->nullable();
             $table->integer('phone');
             $table->integer('emp_id');
-            $table->date('dob');
-            $table->date('doj');
-            $table->binary('photo');
-            $table->binary('signature');
             $table->string('password',100);
+            $table->integer('role_type');
             $table->string('email')->unique();
             $table->rememberToken();
             $table->softDeletes();

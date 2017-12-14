@@ -15,6 +15,7 @@ class ResetPassword extends Migration
         Schema::create('reset_password_log', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('reset_by');
+            $table->integer('reset_of');
             $table->char('mode_of_info',5);
             $table->dateTime('reset_at');
         });

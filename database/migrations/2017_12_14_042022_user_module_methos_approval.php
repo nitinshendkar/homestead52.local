@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EmployeeAddressType extends Migration
+class UserModuleMethosApproval extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,11 @@ class EmployeeAddressType extends Migration
      */
     public function up()
     {
-        Schema::create('employee_address_type', function (Blueprint $table) {
+        Schema::create('module_method_approval', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('address_type',20);
+            $table->integer('role_type');
+            $table->string('module',20);
+            $table->binary('approve_type');
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('created_at');
         });
@@ -27,6 +29,6 @@ class EmployeeAddressType extends Migration
      */
     public function down()
     {
-        Schema::drop('employee_address_type');
+        Schema::drop('module_method_approval');
     }
 }

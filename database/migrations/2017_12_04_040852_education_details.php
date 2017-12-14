@@ -14,6 +14,7 @@ class EducationDetails extends Migration
     {
         Schema::create('education_details', function (Blueprint $table) {
             $table->increments('id');
+            $table->ineger('user_id');
             $table->string('degree',10);
             $table->string('board',30);
             $table->integer('percentage');
