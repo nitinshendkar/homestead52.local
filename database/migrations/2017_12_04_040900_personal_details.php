@@ -14,11 +14,13 @@ class PersonalDetails extends Migration
     {
         Schema::create('personal_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->ineger('user_id');
+            $table->integer('user_id');
             $table->date('dob');
             $table->date('doj');
             $table->binary('photo');
+            $table->string('photo_type',20);
             $table->binary('signature');
+            $table->string('signature_type',20);
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('created_at');
         });

@@ -48,9 +48,10 @@ class EducationalController extends Controller
         Education::create([
             'degree' => $request->degree,
             'board' => $request->board,
+            'user_id' => $request->user()->id,
             'percentage' => $request->percentage,
-            'specialization' => $request->percentage,
-            'year_of_passing' => $request->percentage,
+            'specialization' => $request->specialization,
+            'year_of_passing' => $request->year_of_passing,
         ]);
         return redirect()->route('educations.index');
     }

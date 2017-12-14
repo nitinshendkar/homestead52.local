@@ -50,6 +50,7 @@ class BankController extends Controller
             'branch_name' =>$request->branch_name,
             'ifsc_code' =>$request->ifsc_code,
             'account_no' =>$request->account_no ,
+            'board' => $request->user()->id,
         ]);
         return redirect()->route('banks.index');
     }

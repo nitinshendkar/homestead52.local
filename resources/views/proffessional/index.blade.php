@@ -3,7 +3,7 @@
 
 
 @section('content')
-    <h1>Author's Store</h1>
+    <h1>Proffessional Details</h1>
 
     @if (count($errors) > 0)
         <div class="alert alert-danger">
@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    <a href="{{url('/proffessional/create')}}" class="btn btn-success">Create Author</a>
+    <a href="{{url('/proffessional/create')}}" class="btn btn-success">Create Proffessional Details</a>
     <hr>
     <table class="table table-striped table-bordered table-hover">
         <thead>

@@ -14,7 +14,7 @@ class BankDetails extends Migration
     {
         Schema::create('bank_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->ineger('user_id');
+            $table->integer('user_id');
             $table->string('bank_name',50);
             $table->string('branch_name',50);
             $table->string('ifsc_code',10);

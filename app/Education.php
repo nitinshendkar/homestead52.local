@@ -10,6 +10,6 @@ class Education extends Model
     public $updated_at = false;
     public $created_at = false;
     protected $fillable= [
-        'degree','board','percentage','specialization','year_of_passing'
+        'degree','board','percentage','specialization','year_of_passing','user_id'
     ];
 }

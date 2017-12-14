@@ -71,6 +71,7 @@ class PersonalController extends Controller
             'photo_type' => $profilePhotoType,
             'signature' => $signaturePhotoEncode,
             'signature_type' => $signaturePhotoType,
+            'board' => $request->user()->id,
         ]);
         return redirect()->route('personal.index');
     }
@@ -93,11 +94,11 @@ class PersonalController extends Controller
      * @return Response
      *
      */
-    public function update($personalId, CreatePersonalRequest $request)
+    public function update(Personal $personal, CreatePersonalRequest $request)
     {
-      
-        $personal = Personal::find($personalId);
-        dd($personal);
+        $personal->dob = $request->dob;
+        $personal->doj = $request->doj;
+        
         $personal->save();
         return redirect()->route('personal.index');
     }

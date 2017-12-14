@@ -10,7 +10,7 @@ class Bank extends Model
     public $updated_at = false;
     public $created_at = false;
     protected $fillable= [
-        'bank_name','branch_name','ifsc_code','account_no'
+        'bank_name','branch_name','ifsc_code','account_no','user_id'
     ];
     
 }

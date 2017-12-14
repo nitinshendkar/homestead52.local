@@ -14,7 +14,7 @@ class ProfessionalDetails extends Migration
     {
         Schema::create('professional_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->ineger('user_id');
+            $table->integer('user_id');
             $table->string('designation',30);
             $table->string('organization',100);
             $table->char('current_working',1);

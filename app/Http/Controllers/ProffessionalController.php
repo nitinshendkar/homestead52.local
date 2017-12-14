@@ -52,6 +52,7 @@ class ProffessionalController extends Controller
             'current_working' => $request->current_working,
             'joining_date' => $request->joining_date,
             'year_of_passing' => $request->reveliving_date,
+            'board' => $request->user()->id,
         ]);
         return redirect()->route('proffessional.index');
     }

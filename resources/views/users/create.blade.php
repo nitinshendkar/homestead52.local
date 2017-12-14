@@ -32,14 +32,6 @@
                         <input class="form-control" type="text" name="last_name" value="{{ old('last_name') }}">
                     </div>
                     <div class="form-group input-group">
-                        <span class="input-group-addon">Home Address </span>
-                        <input class="form-control" type="textarea" name="home_address" value="{{ old('home_address') }}">
-                    </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon">Office Address</span>
-                        <input class="form-control" type="textarea" name="office_address" value="{{ old('office_address') }}">
-                    </div>
-                    <div class="form-group input-group">
                         <span class="input-group-addon">Mobile Number</span>
                         <input class="form-control" type="text" name="phone" maxlength="10" value="{{ old('phone') }}">
 
@@ -57,7 +49,7 @@
                     
                     <div class="form-group input-group">
                         <span class="input-group-addon">Role</span>
-                        <select class="form-control"  name="role" >
+                        <select class="form-control"  name="role_type" >
                             <option value="1">Admin</option>
                             <option value="2">District</option>
                             <option value="3">Taluka</option>
@@ -70,22 +62,7 @@
                         <span class="input-group-addon">Employee Id</span>
                         <input class="form-control" type="number" name="emp_id" value="{{ old('emp_id') }}">
                     </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon">Date Of Birth</span>
-                        <input class="form-control" type="date" name="dob" value="{{ old('dob') }}">
-                    </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon">Date Of Joining</span>
-                        <input class="form-control" type="date" name="doj" value="{{ old('doj') }}">
-                    </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon">Photo</span>
-                        <input class="form-control" type="file" name="profile_photo" >
-                    </div>
-                    <div class="form-group input-group">
-                        <span class="input-group-addon">Signature</span>
-                        <input class="form-control" type="file" name="profile_signature">
-                    </div>
+                    
                     <div class="form-group">
                         <button class="btn btn-default "  type="submit">Register</button>
                     </div>

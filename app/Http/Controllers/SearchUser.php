@@ -26,13 +26,13 @@ class SearchUser extends Controller
     
     public function getUser(Request $request)
     {
-        $data['title'] = "Test it from HDTutu.com";
+        /*$data['title'] = "Test it from HDTutu.com";
         Mail::send('emails.reminder', $data, function($message) {
         $message->to("nitinshendkar@gmail.com", 'Receiver Name')
                 ->subject('sdsdsds Mail');
         });
         dd("Mail Sent successfully");
-        exit;
+        exit;*/
         $userlist = "";
         $name = $request->name;
         

@@ -12,11 +12,11 @@ class UserModuleMethosApproval extends Migration
      */
     public function up()
     {
-        Schema::create('module_method_approval', function (Blueprint $table) {
+        Schema::create('user_module_method_approval', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('role_type');
+            $table->integer('user_id');
             $table->string('module',20);
-            $table->binary('approve_type');
+            $table->binary('required_approve_type');
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('created_at');
         });
@@ -29,6 +29,6 @@ class UserModuleMethosApproval extends Migration
      */
     public function down()
     {
-        Schema::drop('module_method_approval');
+        Schema::drop('user_module_method_approval');
     }
 }

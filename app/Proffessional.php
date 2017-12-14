@@ -10,6 +10,6 @@ class Proffessional extends Model
     public $updated_at = false;
     public $created_at = false;
     protected $fillable= [
-        'designation','organization','current_working','joining_date','reveliving_date',''
+        'designation','organization','current_working','joining_date','reveliving_date','user_id'
     ];
 }

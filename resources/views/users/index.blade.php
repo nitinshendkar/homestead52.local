@@ -24,14 +24,8 @@
             <th>Id</th>
             <th>First Name</th>
             <th>Last Name</th>
-            <th>Home Address</th>
-            <th>Office Address</th>
             <th>phone</th>
             <th>employee Id</th>
-            <th>Date Of Birth</th>
-            <th>Date Of Joining</th>
-            <th>Photo</th>
-            <th>Signature</th>
             <th>email</th>
             <th>update</th>
             <th>Delete</th>
@@ -45,15 +39,8 @@
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->lastname }}</td>
-                <td>{{ $user->home_address }}</td>
-                <td>{{ $user->office_address }}</td>
                 <td>{{ $user->phone }}</td>
                 <td>{{ $user->emp_id }}</td>
-                <td>{{ $user->dob }}</td>
-                <td>{{ $user->doj }}</td>
-        
-                <td><?php echo '<img width=100 height=100 src="data:'.$user->photo_type.';base64,' .$user->photo .'"/>'; ?></td>
-                <td><?php echo '<img width=100 height=100 src="data:'.$user->signature_type.';base64,'. $user->signature .'"/>'; ?></td>
                 <td>{{ $user->email }}</td>
                 
                 
