@@ -25,6 +25,7 @@
             <th>Branch Name</th>
             <th>IFSC Code</th>
             <th>Account Number</th>
+            <th>Update</th>
             <th>Delete</th>
         </tr>
         </thead>
@@ -35,6 +36,7 @@
                 <td>{{ $bank->bank_name }}</td>
                 <td>{{ $bank->branch_name }}</td>
                 <td>{{ $bank->ifsc_code }}</td>
+                <td>{{ $bank->account_no }}</td>
                 
                 
                 <td><a href="{{route('banks.edit',$bank->id)}}" class="btn btn-warning">Update</a></td>

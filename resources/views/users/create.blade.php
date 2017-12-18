@@ -48,14 +48,8 @@
                     </div>
                     
                     <div class="form-group input-group">
-                        <span class="input-group-addon">Role</span>
-                        <select class="form-control"  name="role_type" >
-                            <option value="1">Admin</option>
-                            <option value="2">District</option>
-                            <option value="3">Taluka</option>
-                            <option value="">User</option>
-
-                        </select>
+                        {!! Form::label('Role Type', 'Role Type:',['class'=>'input-group-addon']) !!}
+                        {!! Form::select('role_type', session('usercreateaccess'), NULL,['class'=>'form-control']) !!}
 
                     </div>
                     <div class="form-group input-group">

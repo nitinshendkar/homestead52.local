@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ModuleMethodApproval extends Migration
+class CreateDivisionMasterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,10 @@ class ModuleMethodApproval extends Migration
      */
     public function up()
     {
-        Schema::create('module_method_approval', function (Blueprint $table) {
+        Schema::create('division_master', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('role_type');
-            $table->string('module',20);
-            $table->binary('approve_type');
+            $table->integer('district_id');
+            $table->string('division_name');
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('created_at');
         });
@@ -29,6 +28,6 @@ class ModuleMethodApproval extends Migration
      */
     public function down()
     {
-        Schema::drop('module_method_approval');
+        Schema::drop('district_master');
     }
 }

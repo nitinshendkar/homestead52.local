@@ -43,14 +43,20 @@
                 <td>{{ $user->emp_id }}</td>
                 <td>{{ $user->email }}</td>
                 
-                
-                <td><a href="{{route('users.edit',$user->id)}}" class="btn btn-warning">Update</a></td>
+               @if( $user->id == $loggedInUser )
+               <td><a href="{{route('users.edit',$user->id)}}" class="btn btn-warning">Update</a></td>
  
                 <td>
                     {!! Form::open(['method' => 'DELETE', 'route'=>['users.destroy', $user->id]]) !!}
                     {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                     {!! Form::close() !!}
                 </td>
+                @else
+                <td>&nbsp;</td>
+ 
+                <td>&nbsp;</td>
+               @endif
+                
             </tr>
         @endforeach
 

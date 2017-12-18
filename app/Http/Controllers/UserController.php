@@ -14,6 +14,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('permission');
     }
 
     /**
@@ -21,10 +22,11 @@ class UserController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(\Illuminate\Http\Request $request)
     {
-        $users = \App\User::paginate(1);
-        return view('users.index', ['users' => $users]);
+        $loggedInUser = $request->user()->id;
+        $users = \App\User::paginate(5);
+        return view('users.index', ['users' => $users,'loggedInUser'=> $loggedInUser]);
     }
 
     /**
@@ -45,6 +47,7 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
+        
         User::create([
             'name' => $request->first_name,
             'lastname' => $request->last_name,
@@ -54,6 +57,16 @@ class UserController extends Controller
             'emp_id' => $request->emp_id,
             'password' => bcrypt($request->password),
         ]);
+        
+//        User::create([
+//            'name' => $request->first_name,
+//            'lastname' => $request->last_name,
+//            'phone' => $request->phone,
+//            'email' => $request->email,
+//            'role_type' => $request->role_type,
+//            'emp_id' => $request->emp_id,
+//            'password' => bcrypt($request->password),
+//        ]);
         return redirect()->route('users.index');
     }
 

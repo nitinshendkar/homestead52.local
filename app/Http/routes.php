@@ -78,6 +78,9 @@ Route::POST('search/find', ['as' => 'search.find', 'uses' => 'SearchUser@getUser
 Route::get('paywithpaypal', array('as' => 'addmoney.paywithpaypal','uses' => 'AddMoneyController@payWithPaypal',));
 Route::post('paypal', array('as' => 'addmoney.paypal','uses' => 'AddMoneyController@postPaymentWithpaypal',));
 
+Route::get('nopermission', array('as' => 'Permission.nopermission','uses' => 'PermissionController@nopermission'));
+Route::get('notapproved', array('as' => 'Permission.notapproved','uses' => 'PermissionController@notapproved'));
+Route::get('createrecord', array('as' => 'Permission.createrecord','uses' => 'PermissionController@createrecord'));
 Route::get('send-main', 'nitinshendkar@gmail.com');
 Route::get('paypal', array('as' => 'payment.status','uses' => 'AddMoneyController@getPaymentStatus',));
 
