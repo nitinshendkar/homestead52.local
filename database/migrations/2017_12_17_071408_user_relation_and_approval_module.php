@@ -12,14 +12,7 @@ class UserRelationAndApprovalModule extends Migration
      */
     public function up()
     {
-       Schema::create('user_approval', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('user_id');
-            $table->integer('parent_id');
-            $table->text('aprroval_module');
-            $table->dateTime('updated_at')->nullable();
-            $table->dateTime('created_at');
-        });
+       
     }
 
     /**

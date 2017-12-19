@@ -26,12 +26,15 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@create']);
 
 //home
-Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
-Route::get('home', ['as' => 'home', 'uses' => 'HomeController@index']);
+Route::get('/', ['as' => 'home', 'uses' => 'MessageBoardController@index']);
+Route::get('home', ['as' => 'home', 'uses' => 'MessageBoardController@index']);
+Route::get('messageboard/create', ['as' => 'home', 'uses' => 'MessageBoardController@create']);
+Route::post('messageboard', ['as' => 'messageboard.store', 'uses' => 'MessageBoardController@store']);
 
 //users
 Route::get('users', ['as' => 'users.index', 'uses' => 'UserController@index']);
 Route::post('users', ['as' => 'users.store', 'uses' => 'UserController@store']);
+Route::post('users/reset/{user}', ['as' => 'users.reset', 'uses' => 'UserController@reset']);
 Route::get('users/create', ['as' => 'users.create', 'uses' => 'UserController@create']);
 Route::get('users/edit/{user}', ['as' => 'users.edit', 'uses' => 'UserController@edit']);
 Route::delete('users/{user}', ['as' => 'users.destroy', 'uses' => 'UserController@destroy']);
@@ -81,6 +84,6 @@ Route::post('paypal', array('as' => 'addmoney.paypal','uses' => 'AddMoneyControl
 Route::get('nopermission', array('as' => 'Permission.nopermission','uses' => 'PermissionController@nopermission'));
 Route::get('notapproved', array('as' => 'Permission.notapproved','uses' => 'PermissionController@notapproved'));
 Route::get('createrecord', array('as' => 'Permission.createrecord','uses' => 'PermissionController@createrecord'));
-Route::get('send-main', 'nitinshendkar@gmail.com');
+Route::get('send-mail', 'nitinshendkar@gmail.com');
 Route::get('paypal', array('as' => 'payment.status','uses' => 'AddMoneyController@getPaymentStatus',));
 

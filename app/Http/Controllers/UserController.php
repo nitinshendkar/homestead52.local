@@ -99,6 +99,15 @@ class UserController extends Controller
             $user->save();
         return redirect()->route('users.index');
     }
+    
+    public function reset(User $user)
+    {
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
+        $password = substr( str_shuffle( $chars ), 0, 6 );
+        $user->password = bcrypt($password);
+        $user->save();
+        return redirect()->route('users.index')->with('success','Paswword Reset for User.'.$password);
+    }
 
     /**
      * Remove the specified resource from storage.

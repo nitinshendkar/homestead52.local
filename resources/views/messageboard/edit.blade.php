@@ -1,11 +1,10 @@
-
 @extends('layout/base')
+
 @section('header')
-    Create User
+    <h1>Update User</h1>
 @endsection
 
 @section('content')
-
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -15,7 +14,10 @@
             </ul>
         </div>
     @endif
-    <div class="container">
+    
+    
+        {!! Form::model($user,['method' => 'PATCH','route'=>['users.update',$user->id],'files' => true ]) !!}
+     <div class="container">
     <div class="row">
         <div class="centered col-md-4 col-md-offset-4 text-center top_50">
             <div id="logo-container"></div>
@@ -25,44 +27,38 @@
 
                     <div class="form-group input-group">
                         <span class="input-group-addon"> first Name</span>
-                        <input class="form-control" type="text" name="first_name" value="{{ old('first_name') }}">
+                        <input class="form-control" type="text" name="first_name" value="{{ $user-> name }}">
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon"> Last Name</span>
-                        <input class="form-control" type="text" name="last_name" value="{{ old('last_name') }}">
+                        <input class="form-control" type="text" name="last_name" value="{{ $user->lastname }}">
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon">Mobile Number</span>
-                        <input class="form-control" type="text" name="phone" maxlength="10" value="{{ old('phone') }}">
+                        <input class="form-control" type="text" name="phone" maxlength="10" value="{{ $user->phone }}">
 
                     </div>
                     <div class="form-group input-group">
-                        <span class="input-group-addon">password</span>
-                        <input class="form-control" type="password" name="password"  value="{{ old('password') }}">
-
+                        {!! Form::label('Role Type', 'Role Type:',['class'=>'input-group-addon']) !!}
+                        {!! Form::select('role_type', ['1' => 'Admin', '2' => 'Division','3' =>'District','4' =>'Taluka','5' =>'User'], $user->role_type,['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group input-group">
                         <span class="input-group-addon">Email</span>
-                        <input class="form-control" type="email" name="email"  value="{{ old('email') }}">
+                        <input class="form-control" type="email" name="email"  value="{{ $user->email }}">
 
                     </div>
-                    
-                    <div class="form-group input-group">
-                        {!! Form::label('Role Type', 'Role Type:',['class'=>'input-group-addon']) !!}
-                        {!! Form::select('role_type', session('usercreateaccess'), NULL,['class'=>'form-control']) !!}
-
-                    </div>
+                 
                     <div class="form-group input-group">
                         <span class="input-group-addon">Employee Id</span>
-                        <input class="form-control" type="number" name="emp_id" value="{{ old('emp_id') }}">
+                        <input class="form-control" type="number" name="emp_id" value="{{ $user->emp_id }}">
                     </div>
-                    
                     <div class="form-group">
-                        <button class="btn btn-default "  type="submit">Register</button>
+                        <button class="btn btn-default "  type="submit">Save</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+{!! Form::close() !!}
 @stop
