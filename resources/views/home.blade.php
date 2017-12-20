@@ -20,14 +20,13 @@
         </tr>
         </thead>
         <tbody>
-         
         @foreach($messages as $message)
             <tr>
                 
                 <td>{{ $message->id }}</td>
-                <td>{{ $message->from_user_name }}</td>
-                <td>{{ $message->to_role_type }}</td>
-                <td>{{ $message->message }}</td>
+                <td>{{ $message->name }}</td>
+                <td>{{ $message->role_name }}</td>
+                <td>{{ $message->mesaage }}</td>
                 
             </tr>
         @endforeach

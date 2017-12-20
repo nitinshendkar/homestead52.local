@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use App\Http\Requests\CreateMessageRequest;
 use App\MessageBoard;
 use DB;
 
@@ -12,7 +12,12 @@ class MessageBoardController extends Controller
 {
     public function index()
     {
-        $messageBoard = MessageBoard::paginate(5);
+        $messageBoard = MessageBoard::query()
+                ->join('role_master','to_user_role','=','role_master.id')
+                ->join('users','users.id','=','user_message_board.from_user_id')
+                ->select('user_message_board.id','from_user_id','users.name','mesaage','role_name')
+                ->paginate(5);
+        //dd($messageBoard);
         return view('home', ['messages' => $messageBoard]);
     }
     
@@ -37,17 +42,14 @@ class MessageBoardController extends Controller
      * @param  CreateUserRequest $request
      * @return Response
      */
-    public function store(CreateUserRequest $request)
+    public function store(CreateMessageRequest $request)
     {
         
-        User::create([
-            'name' => $request->first_name,
-            'lastname' => $request->last_name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'role_type' => $request->role_type,
-            'emp_id' => $request->emp_id,
-            'password' => bcrypt($request->password),
+        MessageBoard::create([
+            'from_user_id' => $request->user()->id,
+            'to_user_role' => $request->role_type,
+            'mesaage' => $request->message,
+            'is_deleted' => false,
         ]);
         return redirect()->route('users.index');
     }
