@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Bank extends Model
+class Approval extends Model
 {
-    protected $table= 'bank_details';
+    protected $table= 'user_approval';
     public $updated_at = false;
     public $created_at = false;
     protected $fillable= [
-        'bank_name','branch_name','ifsc_code','account_no'
+        'user_id','parent_id ','aprroval_module'
     ];
     
 }

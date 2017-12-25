@@ -14,15 +14,15 @@
     {!! Form::open(['route' => 'address.store', 'files' => true]) !!}
     <div class="form-group">
         {!! Form::label('State', 'State:') !!}
-        {!! Form::select('state_id',$state, 'S',['class'=>'form-control']) !!}
+        {!! Form::select('state_id',$arrayReKeystates, 'S',['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('District', 'District:') !!}
-        {!! Form::select('district_id', $district, 'S',['class'=>'form-control']) !!}
+        {!! Form::select('district_id', $arrayReKeydistricts, 'S',['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('Taluka', 'Taluka:') !!}
-        {!! Form::select('taluka_id', $taluka, 'S',['class'=>'form-control']) !!}
+        {!! Form::select('taluka_id', $arrayReKeytalukas, 'S',['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
         {!! Form::label('Address Type', 'Address Type:') !!}

@@ -26,9 +26,11 @@ Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController@create']);
 
 //home
-Route::get('/', ['as' => 'home', 'uses' => 'MessageBoardController@index']);
-Route::get('home', ['as' => 'home', 'uses' => 'MessageBoardController@index']);
-Route::get('messageboard/create', ['as' => 'home', 'uses' => 'MessageBoardController@create']);
+Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
+Route::get('home', ['as' => 'home', 'uses' => 'HomeController@index']);
+
+Route::get('messageboard/', ['as' => 'messageboard', 'uses' => 'MessageBoardController@index']);
+Route::get('messageboard/create', ['as' => 'messageboard.create', 'uses' => 'MessageBoardController@create']);
 Route::post('messageboard', ['as' => 'messageboard.store', 'uses' => 'MessageBoardController@store']);
 
 //users
@@ -39,6 +41,10 @@ Route::get('users/create', ['as' => 'users.create', 'uses' => 'UserController@cr
 Route::get('users/edit/{user}', ['as' => 'users.edit', 'uses' => 'UserController@edit']);
 Route::delete('users/{user}', ['as' => 'users.destroy', 'uses' => 'UserController@destroy']);
 Route::patch('users/{user}', ['as' => 'users.update', 'uses' => 'UserController@update']);
+
+Route::get('createapproval', ['as' => 'users.createapproval', 'uses' => 'UserController@createapproval']);
+Route::post('approveuser', ['as' => 'users.storeapproval', 'uses' => 'UserController@storeapproval']);
+
 
 Route::get('educations', ['as' => 'educations.index', 'uses' => 'EducationalController@index']);
 Route::post('educations', ['as' => 'educations.store', 'uses' => 'EducationalController@store']);

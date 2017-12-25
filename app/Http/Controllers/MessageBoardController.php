@@ -18,7 +18,7 @@ class MessageBoardController extends Controller
                 ->select('user_message_board.id','from_user_id','users.name','mesaage','role_name')
                 ->paginate(5);
         //dd($messageBoard);
-        return view('home', ['messages' => $messageBoard]);
+        return view('messageboard.index', ['messages' => $messageBoard]);
     }
     
     /**
@@ -51,7 +51,7 @@ class MessageBoardController extends Controller
             'mesaage' => $request->message,
             'is_deleted' => false,
         ]);
-        return redirect()->route('users.index');
+        return redirect()->route('messageboard.index');
     }
 
     

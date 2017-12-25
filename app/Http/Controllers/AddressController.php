@@ -34,11 +34,24 @@ class AddressController extends Controller
      */
     public function create()
     {
-        $state      = [1=>'Maharashtra',2=>'Gujrat',3=>'Karnataka'];//DB::table('state_master')->select('name')->get();
-        $district   = [1=>'Pune',2=>'Nagar',3=>'Nashik'];//DB::table('district_master')->select('name')->get();
-        $taluka     = [1=>'Khed',2=>'Maval',3=>'Shrigonda'];//DB::table('taluka_master')->select('name')->get();
         
-        return view('address.create', compact('state','district','taluka'));
+       $states = DB::table('state_master')->select('id','name')->get();
+       $arrayReKeystates = [];
+       foreach($states as $state){
+           $arrayReKeystates[$state->id] = $state->name;
+       }
+       
+       $districts = DB::table('district_master')->select('id','name')->get();
+       $arrayReKeydistricts = [];
+       foreach($districts as $district){
+           $arrayReKeydistricts[$district->id] = $district->name;
+       }
+       $talukas = DB::table('taluka_master')->select('id','name')->get();
+       $arrayReKeytalukas = [];
+       foreach($talukas as $taluka){
+           $arrayReKeytalukas[$taluka->id] = $taluka->name;
+       }
+    return view('address.create', compact('arrayReKeystates','arrayReKeydistricts','arrayReKeytalukas'));
     }
 
     /**
@@ -69,11 +82,24 @@ class AddressController extends Controller
      */
     public function edit(Address $address)
     {
-        $state      = [1=>'Maharashtra',2=>'Gujrat',3=>'Karnataka'];//DB::table('state_master')->select('name')->get();
-        $district   = [1=>'Pune',2=>'Nagar',3=>'Nashik'];//DB::table('district_master')->select('name')->get();
-        $taluka     = [1=>'Khed',2=>'Maval',3=>'Shrigonda'];//DB::table('taluka_master')->select('name')->get();
+       $states = DB::table('state_master')->select('id','name')->get();
+       $arrayReKeystates = [];
+       foreach($states as $state){
+           $arrayReKeystates[$state->id] = $state->name;
+       }
+       
+       $districts = DB::table('district_master')->select('id','name')->get();
+       $arrayReKeydistricts = [];
+       foreach($districts as $district){
+           $arrayReKeydistricts[$district->id] = $district->name;
+       }
+       $talukas = DB::table('taluka_master')->select('id','name')->get();
+       $arrayReKeytalukas = [];
+       foreach($talukas as $taluka){
+           $arrayReKeytalukas[$taluka->id] = $taluka->name;
+       }
         
-        return view('address.edit', compact('address','state','district','taluka'));
+        return view('address.edit', compact('address','arrayReKeystates','arrayReKeydistricts','arrayReKeytalukas'));
     }
 
     /**
