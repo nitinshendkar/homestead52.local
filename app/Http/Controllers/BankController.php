@@ -21,10 +21,17 @@ class BankController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(\Illuminate\Http\Request $request)
     {
-        $banks = Bank::paginate(1);
-        return view('banks.index', ['banks' => $banks]);
+        $permittedRoleTypes = session('permittedRoleTypes');
+        $loggedInUser = $request->user()->id;
+        $banks = Bank::query()
+                ->join('users','users.id','=','bank_details.user_id')
+                ->join('role_master', 'role_master.id', '=', 'users.role_type')
+                ->whereIn('role_master.role_type', $permittedRoleTypes)
+                ->select('bank_details.*')
+                ->paginate(10);
+        return view('banks.index', ['banks' => $banks, 'loggedInUser' => $loggedInUser]);
     }
 
     /**
@@ -47,6 +54,7 @@ class BankController extends Controller
     {
         Bank::create([
             'bank_name' =>$request->bank_name,
+            'user_id' =>$request->user()->id,
             'branch_name' =>$request->branch_name,
             'ifsc_code' =>$request->ifsc_code,
             'account_no' =>$request->account_no ,

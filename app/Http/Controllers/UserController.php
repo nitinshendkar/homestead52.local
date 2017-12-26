@@ -14,7 +14,7 @@ class UserController extends Controller {
 
     public function __construct() {
         $this->middleware('auth');
-        $this->middleware('permission');
+        
     }
 
     /**
@@ -120,7 +120,12 @@ class UserController extends Controller {
     }
 
     public function createapproval() {
-        $users = User::query()->select(DB::raw('id,concat(name,"  ",lastname) as name'))->get();
+        $permittedRoleTypes = session('permittedRoleTypes');
+        $users = User::query()
+                ->join('role_master', 'role_master.id', '=', 'users.role_type')
+                ->whereIn('role_master.role_type', $permittedRoleTypes)
+                ->select(DB::raw('users.id,concat(users.name,"  ",users.lastname) as name'))
+                ->get();
         $arraySelectionUserList = [];
         foreach ($users as $user) {
             $arraySelectionUserList[$user->id] = $user->name;

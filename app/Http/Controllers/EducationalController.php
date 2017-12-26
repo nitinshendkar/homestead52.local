@@ -14,7 +14,6 @@ class EducationalController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission');
     }
 
     /**
@@ -22,10 +21,18 @@ class EducationalController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(\Illuminate\Http\Request $request)
     {
-        $educations = \App\Education::paginate(1);
-        return view('educations.index', ['educations' => $educations]);
+        $loggedInUser = $request->user()->id;
+        $permittedRoleTypes = session('permittedRoleTypes');
+        $educations = Education::query()
+                ->join('users','users.id','=','education_details.user_id')
+                ->join('role_master', 'role_master.id', '=', 'users.role_type')
+                ->whereIn('role_master.role_type', $permittedRoleTypes)
+                ->select('education_details.*')
+                ->paginate(10);
+        
+        return view('educations.index', ['educations' => $educations, 'loggedInUser' => $loggedInUser]);
     }
 
     /**

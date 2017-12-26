@@ -14,7 +14,6 @@ class PersonalController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission');
     }
 
     /**
@@ -22,10 +21,17 @@ class PersonalController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(\Illuminate\Http\Request $request)
     {
-        $personals = \App\Personal::paginate(1);
-        return view('personal.index', ['personals' => $personals]);
+        $loggedInUser = $request->user()->id;
+        $permittedRoleTypes = session('permittedRoleTypes');
+        $personals = Personal::query()
+                ->join('users','users.id','=','personal_details.user_id')
+                ->join('role_master', 'role_master.id', '=', 'users.role_type')
+                ->whereIn('role_master.role_type', $permittedRoleTypes)
+                ->select('personal_details.*')
+                ->paginate(10);
+        return view('personal.index', ['personals' => $personals, 'loggedInUser' => $loggedInUser]);
     }
 
     /**

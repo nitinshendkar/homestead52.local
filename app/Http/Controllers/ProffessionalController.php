@@ -21,10 +21,17 @@ class ProffessionalController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(\Illuminate\Http\Request $request)
     {
-        $proffessionals = Proffessional::paginate(1);
-        return view('proffessional.index', ['proffessionals' => $proffessionals]);
+        $permittedRoleTypes = session('permittedRoleTypes');
+        $loggedInUser = $request->user()->id;
+        $proffessionals = Proffessional::query()
+                ->join('users','users.id','=','professional_details.user_id')
+                ->join('role_master', 'role_master.id', '=', 'users.role_type')
+                ->whereIn('role_master.role_type', $permittedRoleTypes)
+                ->select('professional_details.*')
+                ->paginate(10);
+        return view('proffessional.index', ['proffessionals' => $proffessionals, 'loggedInUser' => $loggedInUser]);
     }
 
     /**
@@ -48,6 +55,7 @@ class ProffessionalController extends Controller
         
         Proffessional::create([
             'designation' => $request->designation,
+            'user_id' =>$request->user()->id,
             'organization' => $request->organization,
             'current_working' => $request->current_working,
             'joining_date' => $request->joining_date,

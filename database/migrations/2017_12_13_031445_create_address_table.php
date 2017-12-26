@@ -18,7 +18,7 @@ class CreateAddressTable extends Migration
             $table->integer('state_id');
             $table->integer('district_id');
             $table->integer('taluka_id');
-            $table->integer('address_type');
+            $table->char('address_type',1);
             $table->string('village',50);
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('created_at');
