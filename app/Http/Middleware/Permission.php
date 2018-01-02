@@ -43,6 +43,8 @@ class Permission {
         }
         session(['usercreateaccess' => []]);
         $jasonUserPermission = DB::table('role_master')->join('users', 'role_master.id', '=', 'users.role_type')->where('users.id', '=', $request->user()->id)->first();
+        //dd(json_decode($jasonUserPermission->permission,true));
+        //dd($jasonUserPermission->permission);
         $name = explode('.', Route::currentRouteName());
 
         if (isset($jasonUserPermission) && isset($jasonUserPermission->permission)) {
@@ -66,6 +68,7 @@ class Permission {
                 session(['usercreateaccess' => json_decode($jasonUserPermission->permission)->usercreateaccess]);
             }
         }
+        
         session(['approvalModuleNames' => json_decode($jasonUserPermission->permission)->requiredauthentication]);
         session(['permittedRoleTypes' => json_decode($jasonUserPermission->permission)->child]);
 

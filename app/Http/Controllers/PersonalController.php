@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Personal;
 use App\Http\Requests;
 use App\Http\Requests\CreatePersonalRequest;
 use Illuminate\Support\Facades\DB;
 
-class PersonalController extends Controller
-{
+class PersonalController extends Controller {
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('auth');
     }
 
@@ -21,12 +18,11 @@ class PersonalController extends Controller
      *
      * @return Response
      */
-    public function index(\Illuminate\Http\Request $request)
-    {
+    public function index(\Illuminate\Http\Request $request) {
         $loggedInUser = $request->user()->id;
         $permittedRoleTypes = session('permittedRoleTypes');
         $personals = Personal::query()
-                ->join('users','users.id','=','personal_details.user_id')
+                ->join('users', 'users.id', '=', 'personal_details.user_id')
                 ->join('role_master', 'role_master.id', '=', 'users.role_type')
                 ->whereIn('role_master.role_type', $permittedRoleTypes)
                 ->select('personal_details.*')
@@ -39,8 +35,7 @@ class PersonalController extends Controller
      *
      * @return Response
      */
-    public function create()
-    {
+    public function create() {
         return view('personal.create');
     }
 
@@ -50,48 +45,43 @@ class PersonalController extends Controller
      * @param  CreatePersonalRequest $request
      * @return Response
      */
-    public function store(CreatePersonalRequest $request)
-    {
+    public function store(CreatePersonalRequest $request) {
         $profilePhotoType = null;
-        $signaturePhotoType= null;
+        $signaturePhotoType = null;
         $profilePhotoEncode = null;
         $signaturePhotoEncode = null;
-        
-        if(!empty($request->photo)){
+
+        if (!empty($request->photo)) {
             $profilePhoto = file_get_contents($request->photo->getPathname());
             $profilePhotoType = $request->photo->getClientMimeType();
             $profilePhotoEncode = base64_encode($profilePhoto);
         }
-        if(!empty($request->signature)){
+        if (!empty($request->signature)) {
             $signaturePhoto = file_get_contents($request->signature->getPathname());
             $signaturePhotoType = $request->signature->getClientMimeType();
             $signaturePhotoEncode = base64_encode($signaturePhoto);
         }
         
-        
-        
-        
         Personal::create([
             'dob' => $request->dob,
             'doj' => $request->doj,
             'photo' => $profilePhotoEncode,
+            'user_id' => $request->user()->id,
             'photo_type' => $profilePhotoType,
             'signature' => $signaturePhotoEncode,
             'signature_type' => $signaturePhotoType,
-            'board' => $request->user()->id,
         ]);
         return redirect()->route('personal.index');
     }
 
-   /**
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  Book $book
      * @return Response
      */
-    public function edit(Personal $personal)
-    {
-      return view('personal.edit', compact('personal'));
+    public function edit(Personal $personal) {
+        return view('personal.edit', compact('personal'));
     }
 
     /**
@@ -101,11 +91,10 @@ class PersonalController extends Controller
      * @return Response
      *
      */
-    public function update(Personal $personal, CreatePersonalRequest $request)
-    {
+    public function update(Personal $personal, CreatePersonalRequest $request) {
         $personal->dob = $request->dob;
         $personal->doj = $request->doj;
-        
+
         $personal->save();
         return redirect()->route('personal.index');
     }
@@ -116,9 +105,9 @@ class PersonalController extends Controller
      * @param  int $id
      * @return Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         Personal::find($id)->delete();
         return redirect()->route('personal.index');
     }
+
 }

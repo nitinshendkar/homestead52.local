@@ -12,9 +12,11 @@ class MessageBoardController extends Controller
 {
     public function index()
     {
+        $permittedRoleTypes = session('permittedRoleTypes');
         $messageBoard = MessageBoard::query()
                 ->join('role_master','to_user_role','=','role_master.id')
                 ->join('users','users.id','=','user_message_board.from_user_id')
+                ->whereIn('role_master.role_type', $permittedRoleTypes)
                 ->select('user_message_board.id','from_user_id','users.name','mesaage','role_name')
                 ->paginate(5);
         //dd($messageBoard);

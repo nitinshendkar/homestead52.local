@@ -22,11 +22,23 @@ class UserController extends Controller {
      *
      * @return Response
      */
+    public function getAllChildOfUser($loggedInUser){
+        $users = DB::table('user_approval')->where('parent_id','=',$loggedInUser)->first([DB::raw('group_concat(user_id) as user_id')]);
+       
+        $firstChildUsers = DB::table('user_approval')->whereIn('parent_id',explode(',',$users->user_id))->first([DB::raw('group_concat(user_id) as user_id')]);
+        $secondChildUsers = DB::table('user_approval')->whereIn('parent_id',explode(',',$firstChildUsers->user_id))->first([DB::raw('group_concat(user_id) as user_id')]);
+        $thirdChildUsers = DB::table('user_approval')->whereIn('parent_id',explode(',',$secondChildUsers->user_id))->first([DB::raw('group_concat(user_id) as user_id')]);
+        $finalChildList = $loggedInUser . ',' .$users->user_id.','.$firstChildUsers->user_id.','.$secondChildUsers->user_id.','.$thirdChildUsers->user_id;
+        $arrayChildList = explode(',',$finalChildList);
+        return $arrayChildList;
+    }
     public function index(\Illuminate\Http\Request $request) {
         $loggedInUser = $request->user()->id;
+        $arrayChildUsers = $this->getAllChildOfUser($loggedInUser);
         $permittedRoleTypes = session('permittedRoleTypes');
         $users = \App\User::query()->join('role_master', 'role_master.id', '=', 'users.role_type')
                 ->whereIn('role_master.role_type', $permittedRoleTypes)
+                ->whereIn('users.id',$arrayChildUsers)
                 ->select('users.*')
                 ->paginate(10);
         return view('users.index', ['users' => $users, 'loggedInUser' => $loggedInUser]);
@@ -137,8 +149,7 @@ class UserController extends Controller {
     public function storeapproval(Approval $approval, Request $request) {
         $approvalData = $approval->query()->where('user_id', '=', $request->users)->select('aprroval_module')->first();
         $approvalArrayData = json_decode($approvalData->aprroval_module,true);
-        $approvalArrayData[$request->modules] = false;
-        
+        $approvalArrayData[$request->modules] = true;
         DB::table('user_approval')
                 ->where('user_id', '=', $request->users)
                 ->update(['aprroval_module' => json_encode($approvalArrayData)]);

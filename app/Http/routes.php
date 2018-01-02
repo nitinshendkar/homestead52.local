@@ -29,7 +29,7 @@ Route::post('auth/register', ['as' => 'register', 'uses' => 'Auth\AuthController
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('home', ['as' => 'home', 'uses' => 'HomeController@index']);
 
-Route::get('messageboard/', ['as' => 'messageboard', 'uses' => 'MessageBoardController@index']);
+Route::get('messageboard/', ['as' => 'messageboard.index', 'uses' => 'MessageBoardController@index']);
 Route::get('messageboard/create', ['as' => 'messageboard.create', 'uses' => 'MessageBoardController@create']);
 Route::post('messageboard', ['as' => 'messageboard.store', 'uses' => 'MessageBoardController@store']);
 

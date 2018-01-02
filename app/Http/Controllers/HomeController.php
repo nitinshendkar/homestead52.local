@@ -19,6 +19,6 @@ class HomeController extends Controller {
      */
     public function index()
     {
-        return redirect()->route('messageboard');
+        return redirect()->route('messageboard.index');
     }
 }
