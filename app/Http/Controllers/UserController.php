@@ -62,6 +62,7 @@ class UserController extends Controller {
     public function store(CreateUserRequest $request, Approval $approval) {
 
         $approvalModuleNames = session('approvalModuleNames');
+       
         $objNewUser = User::create([
                     'name' => $request->first_name,
                     'lastname' => $request->last_name,
@@ -142,7 +143,7 @@ class UserController extends Controller {
         foreach ($users as $user) {
             $arraySelectionUserList[$user->id] = $user->name;
         }
-        $modules = ['education' => 'education', 'personal' => 'personal', 'bank' => 'bank', 'address' => 'address', 'professional' => 'professiona'];
+        $modules = ['educations' => 'educations', 'personal' => 'personal', 'banks' => 'banks', 'address' => 'address', 'proffessional' => 'proffessional'];
         return view('users.approval', compact('modules', 'arraySelectionUserList'));
     }
 
