@@ -24,9 +24,9 @@ class CreateProffessionalRequest extends Request
     public function rules()
     { 
         return [
-            'designation' => 'required|max:255|alpha_num',
-            'organization' => 'required|max:255|alpha_num',
-            'current_working' => 'required|max:255|alpha_dash',
+            'designation' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+            'organization' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+            'current_working' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
             'joining_date' => 'required|date',
             'reveliving_date' => 'required|date'
         ];

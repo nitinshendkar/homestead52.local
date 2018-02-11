@@ -25,6 +25,7 @@
         <tr class="bg-info">
             <th>Id</th>
             <th>User Name</th>
+            <th>User Last Name</th>
             <th>Mobile Number</th>
            
         </tr>
@@ -35,6 +36,7 @@
             <tr>
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
+                <td>{{ $user->lastname }}</td>
                 <td>{{ $user->phone }}</td>
             </tr>
             @endforeach

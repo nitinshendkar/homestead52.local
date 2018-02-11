@@ -24,9 +24,9 @@ class CreateBankRequest extends Request
     public function rules()
     { 
         return [
-            'bank_name' => 'required|max:255',
-            'branch_name' => 'required|max:255|alpha_num',
-            'ifsc_code' => 'required|alpha_dash',
+            'bank_name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+            'branch_name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+            'ifsc_code' => 'required|regex:/^[\pL\s\-]+$/u',
             'account_no' => 'required|alpha_dash',
         ];
     }

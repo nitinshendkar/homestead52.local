@@ -1,21 +1,21 @@
 
 @extends('layout/base')
 @section('header')
-    Create User
+Create User
 @endsection
 
 @section('content')
 
-    @if (count($errors) > 0)
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <div class="container">
+@if (count($errors) > 0)
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+<div class="container">
     <div class="row">
         <div class="centered col-md-4 col-md-offset-4 text-center top_50">
             <div id="logo-container"></div>
@@ -46,17 +46,19 @@
                         <input class="form-control" type="email" name="email"  value="{{ old('email') }}">
 
                     </div>
-                    
+
                     <div class="form-group input-group">
                         {!! Form::label('Role Type', 'Role Type:',['class'=>'input-group-addon']) !!}
                         {!! Form::select('role_type', session('usercreateaccess'), NULL,['class'=>'form-control']) !!}
 
                     </div>
+                    @if( $user->role_type == 'user')
                     <div class="form-group input-group">
                         <span class="input-group-addon">Employee Id</span>
-                        <input class="form-control" type="number" name="emp_id" value="{{ old('emp_id') }}">
+                        <input class="form-control" type="number" name="emp_id" value="{{ $user->emp_id }}">
                     </div>
-                    
+                    @endif
+
                     <div class="form-group">
                         <button class="btn btn-default "  type="submit">Register</button>
                     </div>

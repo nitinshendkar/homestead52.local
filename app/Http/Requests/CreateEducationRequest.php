@@ -24,10 +24,10 @@ class CreateEducationRequest extends Request
     public function rules()
     { 
         return [
-            'degree' => 'required|max:255|alpha_num',
-            'board' => 'required|max:255|alpha_num',
+            'degree' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+            'board' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
             'percentage' => 'required|numeric',
-            'specialization' => 'required|alpha_dash|max:50',
+            'specialization' => 'required|regex:/^[\pL\s\-]+$/u|max:50',
             'year_of_passing' => 'numeric|required',
         ];
     }

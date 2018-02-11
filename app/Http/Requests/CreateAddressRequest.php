@@ -24,11 +24,11 @@ class CreateAddressRequest extends Request
     public function rules()
     { 
         return [
-            'state_id' => 'required',
-            'district_id' => 'required',
-            'taluka_id' => 'required',
-            'address_type' => 'required',
-            'village' => 'required|alpha_dash'
+            'state_id' => 'required|regex:/^[\pL\s\-]+$/u',
+            'district_id' => 'required|regex:/^[\pL\s\-]+$/u',
+            'taluka_id' => 'required|regex:/^[\pL\s\-]+$/u',
+            'address_type' => 'required|regex:/^[\pL\s\-]+$/u',
+            'village' => 'required|regex:/^[\pL\s\-]+$/u'
         ];
     }
 }

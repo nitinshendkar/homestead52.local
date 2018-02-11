@@ -132,11 +132,14 @@ class UserController extends Controller {
         return redirect()->route('users.index')->with('success', 'Paswword Reset for User.' . $password);
     }
 
-    public function createapproval() {
+    public function createapproval(\Illuminate\Http\Request $request) {
+        $loggedInUser = $request->user()->id;
         $permittedRoleTypes = session('permittedRoleTypes');
+        $arrayChildUsers = $this->getAllChildOfUser($loggedInUser);
         $users = User::query()
                 ->join('role_master', 'role_master.id', '=', 'users.role_type')
                 ->whereIn('role_master.role_type', $permittedRoleTypes)
+                ->whereIn('users.id',$arrayChildUsers)
                 ->select(DB::raw('users.id,concat(users.name,"  ",users.lastname) as name'))
                 ->get();
         $arraySelectionUserList = [];

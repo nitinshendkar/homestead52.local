@@ -38,20 +38,21 @@
                         <input class="form-control" type="text" name="phone" maxlength="10" value="{{ $user->phone }}">
 
                     </div>
-                    <div class="form-group input-group">
+<!--                    <div class="form-group input-group">
                         {!! Form::label('Role Type', 'Role Type:',['class'=>'input-group-addon']) !!}
-                        {!! Form::select('role_type', ['1' => 'Admin', '2' => 'Division','3' =>'District','4' =>'Taluka','5' =>'User'], $user->role_type,['class'=>'form-control']) !!}
-                    </div>
+                        {!! Form::select('role_type', session('usercreateaccess'), $user->role_type,['class'=>'form-control']) !!}
+                    </div>-->
                     <div class="form-group input-group">
                         <span class="input-group-addon">Email</span>
                         <input class="form-control" type="email" name="email"  value="{{ $user->email }}">
 
                     </div>
-                 
+                 @if( $user->role_type == 'user')
                     <div class="form-group input-group">
                         <span class="input-group-addon">Employee Id</span>
                         <input class="form-control" type="number" name="emp_id" value="{{ $user->emp_id }}">
                     </div>
+                 @endif
                     <div class="form-group">
                         <button class="btn btn-default "  type="submit">Save</button>
                     </div>

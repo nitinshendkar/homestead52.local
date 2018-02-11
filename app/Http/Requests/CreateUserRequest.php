@@ -24,8 +24,8 @@ class CreateUserRequest extends Request
     public function rules()
     { 
         return [
-            'first_name' => 'required|max:255|alpha_num',
-            'last_name' => 'required|max:255|alpha_num',
+            'first_name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
+            'last_name' => 'required|regex:/^[\pL\s\-]+$/u|max:255',
             'phone' => 'numeric|required',
             'email' => 'email|required',
             'role_type' => 'numeric|required'
