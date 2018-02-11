@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 
+use DB;
 class SearchUser extends Controller {
 
     public function __construct() {
@@ -38,5 +39,9 @@ class SearchUser extends Controller {
         
         return view('search.show', compact('userlist'));
     }
-
+    
+    public function gettaluka(Request $request){
+        $talukas = DB::table('taluka_master')->where('district_id',$request->district_id)->pluck("name","id");
+        return json_encode($talukas);
+    }
 }

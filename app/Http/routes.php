@@ -92,4 +92,5 @@ Route::get('notapproved', array('as' => 'Permission.notapproved','uses' => 'Perm
 Route::get('createrecord', array('as' => 'Permission.createrecord','uses' => 'PermissionController@createrecord'));
 Route::get('send-mail', 'nitinshendkar@gmail.com');
 Route::get('paypal', array('as' => 'payment.status','uses' => 'AddMoneyController@getPaymentStatus',));
+Route::get('/taluka/get/{district_id}', ['as' => 'search.taluka', 'uses' => 'SearchUser@gettaluka']);
 
