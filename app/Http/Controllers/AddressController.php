@@ -28,7 +28,7 @@ class AddressController extends Controller {
                 ->join('taluka_master','taluka_master.id','=','user_address.taluka_id')
                 ->join('role_master', 'role_master.id', '=', 'users.role_type')
                 ->whereIn('role_master.role_type', $permittedRoleTypes)
-                ->select(['user_address.*','state_master.name as state_name','district_master.name as district_name','taluka_master.name as taluka_name'])
+                ->select(['user_address.*','state_master.name as state_name','district_master.name as district_name','taluka_master.name as taluka_name','users.name','users.lastname'])
                 ->paginate(10);
         return view('address.index', ['address' => $address, 'loggedInUser' => $loggedInUser]);
     }

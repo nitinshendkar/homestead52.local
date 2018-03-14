@@ -21,6 +21,7 @@
     <thead>
         <tr class="bg-info">
             <th>Id</th>
+			<th>User Name</th>
             <th>Bank Name</th>
             <th>Branch Name</th>
             <th>IFSC Code</th>
@@ -33,6 +34,7 @@
         @foreach ($banks as $bank)
         <tr>
             <td>{{ $bank->id }}</td>
+			<td>{{ $bank->name }}&nbsp;{{$bank->lastname}}</td>
             <td>{{ $bank->bank_name }}</td>
             <td>{{ $bank->branch_name }}</td>
             <td>{{ $bank->ifsc_code }}</td>

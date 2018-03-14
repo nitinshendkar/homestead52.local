@@ -23,6 +23,7 @@
     @endif
 
     <a href="{{url('/users/create')}}" class="btn btn-success">Create User</a>
+	<a href="{{url('/changepassword/index')}}" class="btn btn-success">Change User Password</a>
     <hr>
     <table class="table table-striped table-bordered table-hover">
         <thead>

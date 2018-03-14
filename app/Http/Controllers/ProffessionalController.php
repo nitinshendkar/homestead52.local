@@ -29,7 +29,7 @@ class ProffessionalController extends Controller
                 ->join('users','users.id','=','professional_details.user_id')
                 ->join('role_master', 'role_master.id', '=', 'users.role_type')
                 ->whereIn('role_master.role_type', $permittedRoleTypes)
-                ->select('professional_details.*')
+                ->select('professional_details.*','users.name','users.lastname')
                 ->paginate(10);
         return view('proffessional.index', ['proffessionals' => $proffessionals, 'loggedInUser' => $loggedInUser]);
     }

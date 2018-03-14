@@ -20,7 +20,9 @@
 						<li><a href="/educations">Education</a></li>
 						<li><a href="/personal">Personal</a></li>
 						<li><a href="/banks">Bank</a></li>
-						<li><a href="/proffessional">professional</a></li><li><a href="{{ route('address.index')}}">Address</a></li><li><a href="{{ route('users.createapproval')}}">Approval</a></li>
+						<li><a href="/proffessional">professional</a></li><li><a href="{{ route('address.index')}}">Address</a></li>
+						<li><a href="{{ route('users.createapproval')}}">Approval</a></li>
+						
 						<li><a href="{{ route('search.show')}}">Finder</a></li>
 <!--                        <li><a href="/paywithpaypal">Make <br>Payment</a></li>-->
                     </ul>

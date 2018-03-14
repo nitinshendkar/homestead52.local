@@ -12,6 +12,16 @@ class PersonalController extends Controller {
     public function __construct() {
         $this->middleware('auth');
     }
+	public function getAllChildOfUser($loggedInUser){
+        $users = DB::table('user_approval')->where('parent_id','=',$loggedInUser)->first([DB::raw('group_concat(user_id) as user_id')]);
+       
+        $firstChildUsers = DB::table('user_approval')->whereIn('parent_id',explode(',',$users->user_id))->first([DB::raw('group_concat(user_id) as user_id')]);
+        $secondChildUsers = DB::table('user_approval')->whereIn('parent_id',explode(',',$firstChildUsers->user_id))->first([DB::raw('group_concat(user_id) as user_id')]);
+        $thirdChildUsers = DB::table('user_approval')->whereIn('parent_id',explode(',',$secondChildUsers->user_id))->first([DB::raw('group_concat(user_id) as user_id')]);
+        $finalChildList = $loggedInUser . ',' .$users->user_id.','.$firstChildUsers->user_id.','.$secondChildUsers->user_id.','.$thirdChildUsers->user_id;
+        $arrayChildList = explode(',',$finalChildList);
+        return $arrayChildList;
+    }
 
     /**
      * Display a listing of the resource.
@@ -21,11 +31,13 @@ class PersonalController extends Controller {
     public function index(\Illuminate\Http\Request $request) {
         $loggedInUser = $request->user()->id;
         $permittedRoleTypes = session('permittedRoleTypes');
+		$arrayChildUsers = $this->getAllChildOfUser($loggedInUser);
         $personals = Personal::query()
                 ->join('users', 'users.id', '=', 'personal_details.user_id')
                 ->join('role_master', 'role_master.id', '=', 'users.role_type')
                 ->whereIn('role_master.role_type', $permittedRoleTypes)
-                ->select('personal_details.*')
+				 ->whereIn('users.id',$arrayChildUsers)
+                ->select('personal_details.*','users.name','users.lastname')
                 ->paginate(10);
         return view('personal.index', ['personals' => $personals, 'loggedInUser' => $loggedInUser]);
     }

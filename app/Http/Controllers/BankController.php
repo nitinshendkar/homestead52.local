@@ -29,7 +29,7 @@ class BankController extends Controller
                 ->join('users','users.id','=','bank_details.user_id')
                 ->join('role_master', 'role_master.id', '=', 'users.role_type')
                 ->whereIn('role_master.role_type', $permittedRoleTypes)
-                ->select('bank_details.*')
+                ->select('bank_details.*','users.name','users.lastname')
                 ->paginate(10);
         return view('banks.index', ['banks' => $banks, 'loggedInUser' => $loggedInUser]);
     }

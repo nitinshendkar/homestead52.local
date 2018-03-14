@@ -29,7 +29,7 @@ class EducationalController extends Controller
                 ->join('users','users.id','=','education_details.user_id')
                 ->join('role_master', 'role_master.id', '=', 'users.role_type')
                 ->whereIn('role_master.role_type', $permittedRoleTypes)
-                ->select('education_details.*')
+                ->select('education_details.*','users.name','users.lastname')
                 ->paginate(10);
         
         return view('educations.index', ['educations' => $educations, 'loggedInUser' => $loggedInUser]);

@@ -21,6 +21,7 @@
     <thead>
         <tr class="bg-info">
             <th>Id</th>
+			<th>User Name</th>
             <th>Designation</th>
             <th>Organization</th>
             <th>Current Working</th>
@@ -34,6 +35,7 @@
         @foreach ($proffessionals as $proffessional)
         <tr>
             <td>{{ $proffessional->id }}</td>
+			<td>{{ $proffessional->name }}&nbsp;{{$proffessional->lastname}}</td>
             <td>{{ $proffessional->designation }}</td>
             <td>{{ $proffessional->organization }}</td>
             <td>{{ $proffessional->current_working }}</td>

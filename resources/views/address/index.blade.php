@@ -21,6 +21,7 @@
     <thead>
         <tr class="bg-info">
             <th>Id</th>
+			<th>User Name</th>
             <th>State</th>
             <th>District</th>
             <th>Taluka</th>
@@ -34,6 +35,7 @@
         @foreach ($address as $addressobj)
         <tr>
             <td>{{ $addressobj->id }}</td>
+			<td>{{ $addressobj->name }}&nbsp;{{$addressobj->lastname}}</td>
             <td>{{ $addressobj->state_name }}</td>
             <td>{{ $addressobj->district_name }}</td>
             <td>{{ $addressobj->taluka_name }}</td>

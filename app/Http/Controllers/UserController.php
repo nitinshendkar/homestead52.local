@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Education;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateUserRequest;
@@ -49,8 +50,8 @@ class UserController extends Controller {
      *
      * @return Response
      */
-    public function create() {
-        return view('users.create');
+    public function create(User $user) {
+        return view('users.create', compact('user'));
     }
 
     /**
@@ -123,7 +124,7 @@ class UserController extends Controller {
         $mail = Mail::getFacadeRoot();
 
         $mail->send('emails.reminder', $data, function($message) use($user) {
-            $message->to("nitinshendkar@gmail.com", $user->name . ' ' . $user->lastname)
+            $message->to($user->email, $user->name . ' ' . $user->lastname)
                     ->subject('Password Rest for Online Registration');
         });
 
@@ -148,6 +149,13 @@ class UserController extends Controller {
         }
         $modules = ['educations' => 'educations', 'personal' => 'personal', 'banks' => 'banks', 'address' => 'address', 'proffessional' => 'proffessional'];
         return view('users.approval', compact('modules', 'arraySelectionUserList'));
+    }
+	
+	public function showUserInformation(\Illuminate\Http\Request $request) {
+		$user = User::where('id',$request->user_id)->first();
+		$educations = Education::where('user_id',$request->user_id)->get();
+		$contents = view('users.show', ['user' => $user,'educations'=>$educations])->render();
+        return $contents;
     }
 
     public function storeapproval(Approval $approval, Request $request) {

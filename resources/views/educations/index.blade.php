@@ -21,6 +21,7 @@
     <thead>
         <tr class="bg-info">
             <th>Id</th>
+			<th>User Name</th>
             <th>Degree</th>
             <th>Board</th>
             <th>Percentage</th>
@@ -34,6 +35,7 @@
         @foreach ($educations as $education)
         <tr>
             <td>{{ $education->id }}</td>
+			<td>{{ $education->name }}&nbsp;{{$education->lastname}}</td>
             <td>{{ $education->degree }}</td>
             <td>{{ $education->board }}</td>
             <td>{{ $education->percentage}}</td>

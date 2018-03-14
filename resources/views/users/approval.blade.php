@@ -36,8 +36,34 @@
                         <button class="btn btn-default "  type="submit">Approve</button>
                     </div>
                 {!! Form::close() !!}
+				<div id="showuserdetail"></div>
             </div>
         </div>
     </div>
 </div>
 @stop
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        $('select[name="users"]').on('change', function () {
+            var districtid = $(this).val();
+            
+            if (districtid) {
+                $.ajax({
+                    url: 'users/showUserInformation/' + districtid,
+                    type: "GET",
+                    success: function (data) {
+                        console.log(data);
+						$('#showuserdetail').html(data);
+                    }
+                });
+            } else {
+                console.log('empty field');
+            }
+
+        });
+
+    });
+</script>

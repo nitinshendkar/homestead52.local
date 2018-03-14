@@ -81,6 +81,9 @@ Route::get('banks/edit/{bank}', ['as' => 'banks.edit', 'uses' => 'BankController
 Route::delete('banks/{bank}', ['as' => 'banks.destroy', 'uses' => 'BankController@destroy']);
 Route::patch('banks/{bank}', ['as' => 'banks.update', 'uses' => 'BankController@update']);
 
+Route::get('changepassword/index', ['as' => 'changepassword.index', 'uses' => 'ChangePasswordController@index']);
+Route::post('changepassword/store', ['as' => 'changepassword.store', 'uses' => 'ChangePasswordController@store']);
+
 Route::get('search', ['as' => 'search.show', 'uses' => 'SearchUser@index']);
 Route::POST('search/find', ['as' => 'search.find', 'uses' => 'SearchUser@getUser']);
 
@@ -93,4 +96,5 @@ Route::get('createrecord', array('as' => 'Permission.createrecord','uses' => 'Pe
 Route::get('send-mail', 'nitinshendkar@gmail.com');
 Route::get('paypal', array('as' => 'payment.status','uses' => 'AddMoneyController@getPaymentStatus',));
 Route::get('/taluka/get/{district_id}', ['as' => 'search.taluka', 'uses' => 'SearchUser@gettaluka']);
+Route::get('users/showUserInformation/{user_id}', ['as' => 'users.showUserInformation', 'uses' => 'UserController@showUserInformation']);
 

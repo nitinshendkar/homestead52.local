@@ -21,6 +21,7 @@
     <thead>
         <tr class="bg-info">
             <th>Id</th>
+			<th>User Name</th>
             <th>Date Of Birth</th>
             <th>Date Of Joining</th>
             <th>Signature</th>
@@ -33,6 +34,7 @@
         @foreach ($personals as $personal)
         <tr>
             <td>{{ $personal->id }}</td>
+			<td>{{ $personal->name }}&nbsp;{{$personal->lastname}}</td>
             <td>{{ $personal->dob}}</td>
             <td>{{ $personal->doj }}</td>
             <td><?php echo '<img width=100 height=100 src="data:' . $personal->photo_type . ';base64,' . $personal->photo . '"/>'; ?></td>

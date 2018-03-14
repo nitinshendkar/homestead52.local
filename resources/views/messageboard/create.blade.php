@@ -29,9 +29,9 @@
 
                     </div>
                     
-                    <div class="form-group input-group ">
+                    <div class="form-group input-group " style=" height: 150px;">
                         <span class="input-group-addon"> Message</span>
-                        <input class="form-control text-area" type="textarea" name="message" value="{{ old('last_name') }}">
+                        <input class="form-control text-area" type="textarea" name="message" style=" height: 150px; width:500px;" value="{{ old('last_name') }}">
                     </div>
                    
                     
